@@ -4,505 +4,629 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Victoria Carabajal | International Business Development & Trade</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #f8fafc;           
-            --card-bg: #ffffff;            
-            --text-main: #1e293b;          
-            --text-muted: #64748b;         
-            --accent: #1e3a8a;             /* Azul marino corporativo y sofisticado que combina con todo */
-            --accent-hover: #1e40af;       
-            --accent-light: #e0e7ff;       /* Tono pastel suave para etiquetas y detalles */
-            --border: #e2e8f0;             
+            --bg-color: #fafaf9;          /* Fondo claro, cálido y limpio */
+            --card-bg: #ffffff;           /* Fondo de las tarjetas totalmente blanco */
+            --text-main: #1c1917;         /* Texto principal oscuro muy legible */
+            --text-muted: #78716c;        /* Texto secundario gris cálido */
+            --accent: #b45309;            /* Tono ámbar/dorado elegante para acentos y detalles */
+            --accent-hover: #92400e;      
+            --border: #e7e5e4;            /* Bordes sutiles y claros */
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
             display: flex;
-            min-height: 100vh;
             justify-content: center;
-            padding: 2rem 1.5rem;
-            position: relative;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
         }
 
-        /* Selector de idiomas flotante */
-        .lang-selector {
-            position: absolute;
-            top: 1.5rem;
-            right: 2rem;
-            display: flex;
-            gap: 0.5rem;
-            z-index: 10;
-        }
-
-        .lang-btn {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 0.4rem 0.8rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            transition: all 0.2s;
-        }
-
-        .lang-btn.active, .lang-btn:hover {
-            background-color: var(--accent);
-            color: white;
-            border-color: var(--accent);
-        }
-
-        .container {
+        /* Estructura de 3 columnas con scroll independiente */
+        .layout-container {
             display: grid;
-            grid-template-columns: 320px 1fr;
-            gap: 2.5rem;
-            max-width: 1200px;
-            width: 100%;
-            margin-top: 2rem;
+            grid-template-columns: 340px 1fr 340px;
+            width: 100vw;
+            height: 100vh;
+            max-width: 1600px;
+            overflow: hidden;
         }
 
-        @media (max-width: 900px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
-            .lang-selector {
-                position: relative;
-                top: 0;
-                right: 0;
-                justify-content: flex-end;
-                margin-bottom: 1rem;
-            }
-        }
-
-        /* Sidebar izquierdo */
-        aside {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
+        /* Columna 1: Sidebar Izquierdo */
+        aside.left-sidebar {
+            background-color: var(--card-bg);
+            border-right: 1px solid var(--border);
             padding: 2.5rem 2rem;
-            height: fit-content;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+            overflow-y: auto;
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
         }
 
-        /* Foto de perfil en formato perfectamente circular */
-        .profile-img {
-            width: 120px;
-            height: 120px;
+        .profile-img-container {
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
-            object-fit: cover;
+            overflow: hidden;
+            border: 2px solid var(--accent);
             background-color: var(--border);
-            border: 3px solid #f1f5f9;
         }
 
-        aside h1 {
-            font-size: 1.5rem;
-            margin-bottom: 0.2rem;
-            line-height: 1.2;
-            color: #0f172a;
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        aside p.subtitle {
+        aside.left-sidebar h1 {
+            font-size: 1.4rem;
+            line-height: 1.3;
+            color: var(--text-main);
+        }
+
+        aside.left-sidebar p.subtitle {
             color: var(--accent);
+            font-size: 0.85rem;
             font-weight: 600;
-            font-size: 0.9rem;
+            margin-top: 0.2rem;
         }
 
-        aside p.bio {
+        aside.left-sidebar p.bio {
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             line-height: 1.6;
         }
 
-        /* Enlaces sociales en el panel */
-        .social-links {
+        .social-icons {
             display: flex;
-            gap: 0.75rem;
-            margin-top: -0.5rem;
+            gap: 1rem;
+            align-items: center;
         }
 
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            background-color: var(--accent-light);
+        .social-icons a {
             color: var(--accent);
             text-decoration: none;
-            font-weight: bold;
-            font-size: 0.9rem;
-            transition: background 0.2s;
+            font-weight: 700;
+            font-size: 0.85rem;
+            border: 1px solid var(--border);
+            padding: 0.4rem 0.7rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+            background: rgba(180, 83, 9, 0.03);
         }
 
-        .social-links a:hover {
-            background-color: var(--accent);
-            color: white;
+        .social-icons a:hover {
+            background: var(--accent);
+            color: #ffffff;
         }
 
         .btn-cv {
             display: block;
-            width: 100%;
             text-align: center;
-            background-color: var(--accent);
-            color: white;
-            padding: 0.8rem;
-            border-radius: 8px;
+            background-color: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 0.7rem;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.9rem;
-            transition: background-color 0.2s, transform 0.1s;
+            font-size: 0.85rem;
+            transition: all 0.2s;
         }
 
         .btn-cv:hover {
-            background-color: var(--accent-hover);
-            transform: translateY(-1px);
+            background-color: var(--accent);
+            color: #ffffff;
         }
 
-        .sidebar-section {
+        .sidebar-info-block {
             border-top: 1px solid var(--border);
-            padding-top: 1.2rem;
+            padding-top: 1rem;
         }
 
-        .sidebar-section h3 {
-            font-size: 0.95rem;
-            margin-bottom: 0.75rem;
-            color: #0f172a;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .sidebar-section ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .sidebar-section li {
+        .sidebar-info-block strong {
+            display: block;
             font-size: 0.85rem;
+            color: var(--text-main);
+            margin-bottom: 0.2rem;
+        }
+
+        .sidebar-info-block span {
+            font-size: 0.8rem;
             color: var(--text-muted);
-            line-height: 1.4;
         }
 
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
-        }
-
-        .tag {
-            background-color: var(--accent-light);
-            color: var(--accent);
-            font-size: 0.75rem;
-            padding: 0.3rem 0.6rem;
-            border-radius: 6px;
-            font-weight: 600;
-        }
-
-        /* Contenido principal */
-        main {
+        /* Columna 2: Centro (Contenido Principal y Proyectos) */
+        main.center-content {
+            padding: 2.5rem 3rem;
+            overflow-y: auto;
             display: flex;
             flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1.2rem;
+        }
+
+        .nav-tabs {
+            display: flex;
             gap: 2rem;
         }
 
-        /* Navegación superior */
-        .top-nav {
-            display: flex;
-            gap: 1.5rem;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 1rem 1.5rem;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .nav-links a {
+        .nav-tabs a {
             text-decoration: none;
             color: var(--text-muted);
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             transition: color 0.2s;
         }
 
-        .nav-links a:hover {
+        .nav-tabs a:hover {
             color: var(--accent);
         }
 
-        .hero {
-            background: var(--card-bg);
+        .nav-right-icons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-right-icons a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 3rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            transition: color 0.2s, border-color 0.2s;
+            background: #ffffff;
         }
 
-        .hero h2 {
-            font-size: 2.1rem;
-            margin-bottom: 1rem;
+        .nav-right-icons a:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .hero-section h2 {
+            font-size: 2.2rem;
             line-height: 1.2;
-            color: #0f172a;
+            margin-bottom: 1rem;
+            color: var(--text-main);
         }
 
-        .hero h2 span {
+        .hero-section h2 span {
             color: var(--accent);
         }
 
-        .hero p {
+        .hero-section p {
             color: var(--text-muted);
             font-size: 1.05rem;
             line-height: 1.7;
         }
 
-        .section-title {
-            font-size: 1.3rem;
-            margin-bottom: 1.2rem;
-            color: #0f172a;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        /* Core Skills & Focus */
+        .skills-grid-section {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 2rem 0;
         }
 
-        .projects-grid {
+        .skills-title {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
+        }
+
+        .skills-columns {
             display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
         }
 
+        .skill-column h4 {
+            font-size: 0.95rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-column p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Proyectos */
+        .section-heading {
+            font-size: 1.25rem;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+        }
+
+        .projects-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
         .project-card {
-            background: var(--card-bg);
+            background-color: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
-            transition: transform 0.2s, box-shadow 0.2s;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            transition: transform 0.2s, border-color 0.2s;
         }
 
         .project-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* Estilo especial para destacar el proyecto principal (Amazon) */
+        .project-card.featured {
+            border: 2px solid var(--accent);
+        }
+
+        .project-image-container {
+            width: 100%;
+            height: 220px;
+            background-color: #f1f1f0;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.02);
+        }
+
+        .project-content {
+            padding: 1.8rem;
         }
 
         .project-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.6rem;
-            color: #0f172a;
+            font-size: 1.15rem;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
         }
 
         .project-card p {
             color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 1.25rem;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 1.2rem;
-        }
-
-        .project-links a {
             font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.2rem;
+        }
+
+        .project-tag {
+            background: rgba(180, 83, 9, 0.08);
+            color: var(--accent);
+            font-size: 0.75rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .project-action-link {
             color: var(--accent);
             text-decoration: none;
+            font-size: 0.85rem;
             font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
         }
 
-        .project-links a:hover {
+        .project-action-link:hover {
             text-decoration: underline;
         }
 
-        /* Sección de Highlights */
-        .highlights-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
-        }
-
-        .highlights-card ul {
-            list-style: disc;
-            margin-left: 1.2rem;
+        /* Columna 3: Sidebar Derecho (Profile Highlights) */
+        aside.right-sidebar {
+            background-color: var(--card-bg);
+            border-left: 1px solid var(--border);
+            padding: 2.5rem 2rem;
+            overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 0.6rem;
+            gap: 1.5rem;
+        }
+
+        aside.right-sidebar h3 {
+            font-size: 1rem;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+        }
+
+        .highlight-item {
+            margin-bottom: 1.2rem;
+        }
+
+        .highlight-item strong {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            margin-bottom: 0.2rem;
+        }
+
+        .highlight-item p, .highlight-item li {
+            font-size: 0.8rem;
             color: var(--text-muted);
-            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .highlight-item ul {
+            list-style: disc;
+            padding-left: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        /* Selector de idioma fijo abajo a la derecha */
+        .fixed-lang-selector {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 0.3rem;
+            border-radius: 8px;
+            display: flex;
+            gap: 0.3rem;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.4rem 0.7rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.75rem;
+            transition: all 0.2s;
+        }
+
+        .lang-btn.active, .lang-btn:hover {
+            background-color: var(--accent);
+            color: #ffffff;
+        }
+
+        /* Responsivo */
+        @media (max-width: 1024px) {
+            .layout-container {
+                grid-template-columns: 1fr;
+                height: auto;
+                overflow-y: auto;
+            }
+            body {
+                overflow-y: auto;
+            }
+            aside.left-sidebar, aside.right-sidebar {
+                border: none;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Selector de Idioma en la esquina -->
-    <div class="lang-selector">
+    <!-- Selector de idioma fijo abajo a la derecha -->
+    <div class="fixed-lang-selector">
         <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
         <button class="lang-btn" onclick="setLanguage('it')">IT</button>
     </div>
 
-    <div class="container">
-        <!-- BARRA LATERAL -->
-        <aside>
-            <img src="./assets/foto.jpg" alt="Victoria Carabajal" class="profile-img">
+    <div class="layout-container">
+        
+        <!-- COLUMNA 1: SIDEBAR IZQUIERDO -->
+        <aside class="left-sidebar">
+            <div class="profile-img-container">
+                <img src="./assets/foto.jpg" alt="Victoria Carabajal" class="profile-img">
+            </div>
             <div>
                 <h1>Victoria Carabajal</h1>
-                <p class="subtitle" data-en="International Trade & Business Development" data-it="Commercio Estero & Business Development">International Trade & Business Development</p>
+                <p class="subtitle" data-en="International Business Development & Trade" data-it="Business Development & Commercio Estero">International Business Development & Trade</p>
             </div>
             
             <p class="bio" data-en="Master's graduate focused on international trade, cross-border market entry, and turning global supply chain strategies into commercial success." data-it="Laureata magistrale focalizzata sul commercio estero, sull'ingresso nei mercati internazionali e sulla trasformazione delle strategie di supply chain globale in successo commerciale.">Master's graduate focused on international trade, cross-border market entry, and turning global supply chain strategies into commercial success.</p>
 
-            <!-- Enlace directo a LinkedIn -->
-            <div class="social-links">
-                <a href="https://www.linkedin.com/in/v-carabajal/" target="_blank" aria-label="LinkedIn">in</a>
+            <div class="social-icons">
+                <a href="https://github.com/victoriacarabajal13" target="_blank" rel="noreferrer">GH</a>
+                <a href="https://www.linkedin.com/in/v-carabajal/" target="_blank" rel="noreferrer">in</a>
+                <a href="mailto:victoriacarabajal13@gmail.com">@</a>
             </div>
 
-            <a href="./documentos/cv-victoria.pdf" class="btn-cv" download data-en="Download CV (PDF)" data-it="Scarica CV (PDF)">Download CV (PDF)</a>
+            <a href="./documentos/cv-victoria.pdf" class="btn-cv" download data-en="Download CV" data-it="Scarica CV">Download CV</a>
 
-            <!-- Detalles del perfil -->
-            <div class="sidebar-section">
-                <h3 data-en="📍 Location" data-it="📍 Sede">📍 Location</h3>
-                <ul>
-                    <li data-en="Based in Rome, Italy" data-it="Con sede a Roma, Italia">Based in Rome, Italy</li>
-                    <li data-en="Open to international opportunities" data-it="Aperta a opportunità internazionali">Open to international opportunities</li>
-                </ul>
+            <div class="sidebar-info-block">
+                <strong data-en="Based in" data-it="Con sede a">Based in</strong>
+                <span data-en="Rome, Italy · Open to global opportunities" data-it="Roma, Italia · Aperta a opportunità globali">Rome, Italy · Open to global opportunities</span>
             </div>
 
-            <div class="sidebar-section">
-                <h3 data-en="🗣️ Languages" data-it="🗣️ Lingue">🗣️ Lingue</h3>
-                <ul>
-                    <li data-en="Spanish (Native) · English (C1) · Italian (B2)" data-it="Spagnolo (Madrelingua) · Inglese (C1) · Italiano (B2)">Spanish (Native) · English (C1) · Italian (B2)</li>
-                    <li data-en="Portuguese (A2) · German (A1) · Mandarin (A1)" data-it="Portoghese (A2) · Tedesco (A1) · Cinese (A1)">Portuguese (A2) · German (A1) · Mandarin (A1)</li>
-                </ul>
-            </div>
-
-            <div class="sidebar-section">
-                <h3 data-en="🎓 Education" data-it="🎓 Formazione">🎓 Education</h3>
-                <ul>
-                    <li data-en="Master in International Management – LUISS Business School (Dean's List)" data-it="Master in International Management – LUISS Business School (Dean's List)">Master in International Management – LUISS Business School (Dean's List)</li>
-                    <li data-en="Bachelor's in International Trade – Universidad Empresarial Siglo 21" data-it="Laurea in Commercio Estero – Universidad Empresarial Siglo 21">Bachelor's in International Trade – Universidad Empresarial Siglo 21</li>
-                </ul>
-            </div>
-
-            <div class="sidebar-section">
-                <h3 data-en="🛠️ Expertise" data-it="🛠️ Competenze">🛠️ Competenze</h3>
-                <div class="tags">
-                    <span class="tag">Cost Optimization</span>
-                    <span class="tag">Import / Export</span>
-                    <span class="tag">Logistics Coordination</span>
-                    <span class="tag">Business Development</span>
-                    <span class="tag">Excel</span>
-                    <span class="tag">Incoterms 2020</span>
-                    <span class="tag">SAP / Oracle</span>
-                    <span class="tag">Salesforce / HubSpot</span>
-                </div>
+            <div class="sidebar-info-block">
+                <strong data-en="Languages" data-it="Lingue">Languages</strong>
+                <span data-en="Spanish (Native) · English (C1) · Italian (B2)" data-it="Spagnolo (Madrelingua) · Inglese (C1) · Italiano (B2)">Spanish (Native) · English (C1) · Italian (B2)</span>
             </div>
         </aside>
 
-        <!-- CONTENIDO PRINCIPAL -->
-        <main>
+        <!-- COLUMNA 2: CONTENIDO PRINCIPAL Y PROYECTOS -->
+        <main class="center-content">
             <!-- Navegación superior -->
             <nav class="top-nav">
-                <div class="nav-links">
+                <div class="nav-tabs">
                     <a href="#overview" data-en="Overview" data-it="Panoramica">Overview</a>
                     <a href="#work" data-en="Selected Work" data-it="Progetti Selezionati">Selected Work</a>
                     <a href="#resume" data-en="Resume" data-it="Curriculum">Resume</a>
                 </div>
+                <div class="nav-right-icons">
+                    <a href="https://github.com/victoriacarabajal13" target="_blank" rel="noreferrer">GitHub</a>
+                    <a href="https://www.linkedin.com/in/v-carabajal/" target="_blank" rel="noreferrer">LinkedIn</a>
+                </div>
             </nav>
 
-            <!-- Cabecera (Overview) -->
-            <section id="overview" class="hero">
-                <h2 data-en="Driving international trade and global expansion through strategy, market analysis, and execution." data-it="Guidare il commercio estero e l'espansione globale attraverso strategia, analisi di mercato ed esecuzione.">Driving international trade and global expansion through strategy, market analysis, and execution.</h2>
+            <!-- Overview Section -->
+            <section id="overview" class="hero-section">
+                <h2 data-en="Driving international trade and global expansion through <span>strategy, market analysis, and execution.</span>" data-it="Guidare il commercio estero e l'espansione globale attraverso <span>strategia, analisi di mercato ed esecuzione.</span>">Driving international trade and global expansion through <span>strategy, market analysis, and execution.</span></h2>
                 <p data-en="From navigating international trade regulations and supply chains to designing scalable business development models. Explore my portfolio of master's projects where global commerce meets commercial reality." data-it="Dalla gestione delle normative del commercio internazionale e delle supply chain alla progettazione di modelli di business development scalabili. Esplora il mio portfolio di progetti magistrali in cui il commercio globale incontra la realtà commerciale.">From navigating international trade regulations and supply chains to designing scalable business development models. Explore my portfolio of master's projects where global commerce meets commercial reality.</p>
             </section>
 
-            <!-- Sección de proyectos (Selected Work) -->
+            <!-- Core Skills & Focus -->
+            <section class="skills-grid-section">
+                <h3 class="skills-title" data-en="Core Skills & Focus" data-it="Competenze e Focus">Core Skills & Focus</h3>
+                <div class="skills-columns">
+                    <div class="skill-column">
+                        <h4 data-en="International Trade" data-it="Commercio Estero">International Trade</h4>
+                        <p data-en="Import/export operations, customs compliance, Incoterms 2020 and multi-modal logistics coordination." data-it="Operazioni di import/export, conformità doganale, Incoterms 2020 e coordinamento logistico multimodale.">Import/export operations, customs compliance, Incoterms 2020 and multi-modal logistics coordination.</p>
+                    </div>
+                    <div class="skill-column">
+                        <h4 data-en="Business Development" data-it="Business Development">Business Development</h4>
+                        <p data-en="Cross-border market entry, B2B lead generation, strategic partnerships and channel expansion." data-it="Ingresso in nuovi mercati, lead generation B2B, partnership strategiche ed espansione dei canali.">Cross-border market entry, B2B lead generation, strategic partnerships and channel expansion.</p>
+                    </div>
+                    <div class="skill-column">
+                        <h4 data-en="Strategy & Supply Chain" data-it="Strategia & Supply Chain">Strategy & Supply Chain</h4>
+                        <p data-en="Cost optimization, vendor negotiation, market assessment and data-driven operational scaling." data-it="Ottimizzazione dei costi, negoziazione con i fornitori, valutazione del mercato e scalabilità operativa basata sui dati.">Cost optimization, vendor negotiation, market assessment and data-driven operational scaling.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Selected Work (Con las 4 portadas y Amazon destacado primero) -->
             <section id="work">
-                <h2 class="section-title" data-en="📂 Strategic Projects & Case Studies" data-it="📂 Progetti Strategici e Casi Studio">📂 Strategic Projects & Case Studies</h2>
-                <div class="projects-grid">
+                <h3 class="section-heading" data-en="Selected Work" data-it="Progetti Selezionati">Selected Work</h3>
+                <div class="projects-list">
                     
-                    <!-- Proyecto Oatly Argentina -->
-                    <article class="project-card">
-                        <h3 data-en="Oatly Argentina: Strategic Internationalization Project" data-it="Oatly Argentina: Progetto di Internazionalizzazione Strategica">Oatly Argentina: Strategic Internationalization Project</h3>
-                        <p data-en="Comprehensive market entry strategy, comparative market analysis for target selection, pricing strategy, Incoterms definition, and full export logistics cost calculation for a plant-based beverage expansion." data-it="Strategia di ingresso nel mercato completa, analisi comparativa per la selezione del mercato target, strategia di prezzo, definizione degli Incoterms e calcolo completo dei costi logistici di esportazione per l'espansione di bevande vegetali.">Comprehensive market entry strategy, comparative market analysis for target selection, pricing strategy, Incoterms definition, and full export logistics cost calculation for a plant-based beverage expansion.</p>
-                        <div class="tags" style="margin-bottom: 1.2rem;">
-                            <span class="tag" data-en="Market Entry" data-it="Ingresso nel Mercato">Market Entry</span>
-                            <span class="tag" data-en="Export Logistics" data-it="Logistica di Esportazione">Export Logistics</span>
-                            <span class="tag">Incoterms 2020</span>
+                    <!-- Proyecto 1: AMAZON LEO (Destacado Principal) -->
+                    <article class="project-card featured">
+                        <div class="project-image-container">
+                            <img src="./assets/amazon-cover.jpg" alt="Amazon LEO Project Preview" class="project-image">
                         </div>
-                        <div class="project-links">
-                            <a href="./documentos/oatly-argentina.pdf" target="_blank" data-en="📄 View Strategy PDF" data-it="📄 Visualizza PDF Strategico">📄 View Strategy PDF</a>
+                        <div class="project-content">
+                            <h3 data-en="Amazon LEO: Market Entry Strategy in Italy" data-it="Amazon LEO: Strategia di Ingresso nel Mercato in Italia">Amazon LEO: Market Entry Strategy in Italy</h3>
+                            <p data-en="Comprehensive market entry plan and hybrid expansion strategy to bridge the rural digital divide via LEO satellites and AWS cloud integration in Italy[cite: 8, 15]." data-it="Piano di ingresso nel mercato completo e strategia di espansione ibrida per colmare il divario digitale rurale tramite satelliti LEO e integrazione cloud AWS in Italia[cite: 8, 15].">Comprehensive market entry plan and hybrid expansion strategy to bridge the rural digital divide via LEO satellites and AWS cloud integration in Italy[cite: 8, 15].</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Market Entry</span>
+                                <span class="project-tag">Hybrid Strategy</span>
+                                <span class="project-tag">AWS Cloud</span>
+                            </div>
+                            <a href="./documentos/amazon-leo.pdf" target="_blank" class="project-action-link" data-en="View Strategy PDF &rarr;" data-it="Visualizza PDF Strategico &rarr;">View Strategy PDF &rarr;</a>
                         </div>
                     </article>
 
-                    <!-- Proyecto 2 (Ejemplo adicional de Supply Chain) -->
+                    <!-- Proyecto 2: ENEL -->
                     <article class="project-card">
-                        <h3 data-en="Global Supply Chain & Operational Scale-Up" data-it="Supply Chain Globale e Scalabilità Operativa">Global Supply Chain & Operational Scale-Up</h3>
-                        <p data-en="Strategic optimization of international procurement routes, multi-modal transport frameworks, and Incoterms selection to protect operating margins and drive supply chain resilience." data-it="Ottimizzazione strategica delle rotte di approvvigionamento internazionale, quadri di trasporto multimodale e selezione degli Incoterms per proteggere i margini operativi e guidare la resilienza della supply chain.">Strategic optimization of international procurement routes, multi-modal transport frameworks, and Incoterms selection to protect operating margins and drive supply chain resilience.</p>
-                        <div class="tags" style="margin-bottom: 1.2rem;">
-                            <span class="tag" data-en="Operations" data-it="Operazioni">Operations</span>
-                            <span class="tag" data-en="Cost Optimization" data-it="Ottimizzazione dei Costi">Cost Optimization</span>
+                        <div class="project-image-container">
+                            <img src="./assets/enel-cover.jpg" alt="Enel Strategy Project Preview" class="project-image">
                         </div>
-                        <div class="project-links">
-                            <a href="./documentos/reporte-logistica.pdf" target="_blank" data-en="📄 View Operational PDF" data-it="📄 Visualizza PDF Operativo">📄 View Operational PDF</a>
+                        <div class="project-content">
+                            <h3 data-en="Enel S.p.A.: Grids-Led Energy-as-Infrastructure Strategy" data-it="Enel S.p.A.: Strategia di Reti ed Energia come Infrastruttura">Enel S.p.A.: Grids-Led Energy-as-Infrastructure Strategy</h3>
+                            <p data-en="Strategic analysis and 2025-2027 plan evaluation focusing on European electricity grid leadership, portfolio optimization, and asset rotation[cite: 25, 28]." data-it="Analisi strategica e valutazione del piano 2025-2027 incentrata sulla leadership nelle reti elettriche europee, ottimizzazione del portafoglio e rotazione degli asset[cite: 25, 28].">Strategic analysis and 2025-2027 plan evaluation focusing on European electricity grid leadership, portfolio optimization, and asset rotation[cite: 25, 28].</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Energy Infrastructure</span>
+                                <span class="project-tag">Portfolio Optimization</span>
+                            </div>
+                            <a href="./documentos/enel-strategy.pdf" target="_blank" class="project-action-link" data-en="View Project PDF &rarr;" data-it="Visualizza PDF del Progetto &rarr;">View Project PDF &rarr;</a>
+                        </div>
+                    </article>
+
+                    <!-- Proyecto 3: SOGRAPE -->
+                    <article class="project-card">
+                        <div class="project-image-container">
+                            <img src="./assets/sogrape-cover.jpg" alt="Sogrape Project Preview" class="project-image">
+                        </div>
+                        <div class="project-content">
+                            <h3 data-en="Sogrape: External Growth & Global Footprint" data-it="Sogrape: Crescita Esterna e Impronta Globale">Sogrape: External Growth & Global Footprint</h3>
+                            <p data-en="Evaluation of alliances, joint ventures, and M&A strategies in the global wine industry, benchmarking premiumization and lifestyle ecosystem models[cite: 31, 32, 33]." data-it="Valutazione di alleanze, joint venture e strategie di M&A nell'industria vinicola globale, confrontando modelli di premiumizzazione ed ecosistema lifestyle[cite: 31, 32, 33].">Evaluation of alliances, joint ventures, and M&A strategies in the global wine industry, benchmarking premiumization and lifestyle ecosystem models[cite: 31, 32, 33].</p>
+                            <div class="project-tags">
+                                <span class="project-tag">M&A & Alliances</span>
+                                <span class="project-tag">Global Footprint</span>
+                            </div>
+                            <a href="./documentos/sogrape.pdf" target="_blank" class="project-action-link" data-en="View Project PDF &rarr;" data-it="Visualizza PDF del Progetto &rarr;">View Project PDF &rarr;</a>
+                        </div>
+                    </article>
+
+                    <!-- Proyecto 4: OATLY -->
+                    <article class="project-card">
+                        <div class="project-image-container">
+                            <img src="./assets/oatly-cover.jpg" alt="Oatly Argentina Project Preview" class="project-image">
+                        </div>
+                        <div class="project-content">
+                            <h3 data-en="Oatly Argentina: Strategic Internationalization Project" data-it="Oatly Argentina: Progetto di Internazionalizzazione Strategica">Oatly Argentina: Strategic Internationalization Project</h3>
+                            <p data-en="Comprehensive market entry strategy, comparative market analysis for target selection, pricing strategy, Incoterms definition, and full export logistics cost calculation." data-it="Strategia di ingresso nel mercato completa, analisi comparativa per la selezione del target, strategia di prezzo, definizione degli Incoterms e calcolo dei costi logistici di esportazione.">Comprehensive market entry strategy, comparative market analysis for target selection, pricing strategy, Incoterms definition, and full export logistics cost calculation.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Market Entry</span>
+                                <span class="project-tag">Export Logistics</span>
+                                <span class="project-tag">Incoterms 2020</span>
+                            </div>
+                            <a href="./documentos/oatly-argentina.pdf" target="_blank" class="project-action-link" data-en="View Strategy PDF &rarr;" data-it="Visualizza PDF Strategico &rarr;">View Strategy PDF &rarr;</a>
                         </div>
                     </article>
 
                 </div>
             </section>
-
-            <!-- Sección de Resume / Profile Highlights -->
-            <section id="resume" class="highlights-card">
-                <h2 class="section-title" data-en="💡 Profile Highlights" data-en-it="💡 Punti di Forza del Profilo" data-it="💡 Punti di Forza del Profilo">💡 Profile Highlights</h2>
-                <ul data-en="
-                    <li><b>3+ years</b> in international trade operations and supply chain management.</li>
-                    <li>Master in International Management at LUISS Business School · Bachelor's in International Trade at Universidad Empresarial Siglo 21[cite: 1].</li>
-                    <li>Selected for the Dean's List & Student Excellence Program at LUISS[cite: 1].</li>
-                    <li>Global business development & cross-border market entry strategies.</li>
-                    <li>Data-driven supply chain cost optimization (achieving 20% freight cost reduction)[cite: 1].</li>
-                    <li>Multilingual stakeholder coordination across LATAM, Europe & Asia[cite: 1].</li>
-                " data-it="
-                    <li><b>3+ anni</b> in operazioni di commercio estero e gestione della supply chain.</li>
-                    <li>Master in International Management presso la LUISS Business School · Laurea in Commercio Estero presso l'Universidad Empresarial Siglo 21[cite: 1].</li>
-                    <li>Selezionata per la Dean's List e il Student Excellence Program alla LUISS[cite: 1].</li>
-                    <li>Business development globale e strategie di ingresso in nuovi mercati.</li>
-                    <li>Ottimizzazione dei costi di supply chain basata sui dati (riduzione del 20% dei costi di trasporto)[cite: 1].</li>
-                    <li>Coordinamento multilingue degli stakeholder tra LATAM, Europa e Asia[cite: 1].</li>
-                ">
-                    <li><b>3+ years</b> in international trade operations and supply chain management.</li>
-                    <li>Master in International Management at LUISS Business School · Bachelor's in International Trade at Universidad Empresarial Siglo 21[cite: 1].</li>
-                    <li>Selected for the Dean's List & Student Excellence Program at LUISS[cite: 1].</li>
-                    <li>Global business development & cross-border market entry strategies.</li>
-                    <li>Data-driven supply chain cost optimization (achieving 20% freight cost reduction)[cite: 1].</li>
-                    <li>Multilingual stakeholder coordination across LATAM, Europe & Asia[cite: 1].</li>
-                </ul>
-            </section>
         </main>
+
+        <!-- COLUMNA 3: SIDEBAR DERECHO (PROFILE HIGHLIGHTS) -->
+        <aside id="resume" class="right-sidebar">
+            <h3 data-en="Profile Highlights" data-it="Punti di Forza del Profilo">Profile Highlights</h3>
+            
+            <div class="highlight-item">
+                <strong data-en="Experience" data-it="Esperienza">Experience</strong>
+                <p data-en="3+ years in international trade operations and supply chain management." data-it="3+ anni in operazioni di commercio estero e gestione della supply chain.">3+ years in international trade operations and supply chain management.</p>
+            </div>
+
+            <div class="highlight-item">
+                <strong data-en="Education" data-it="Formazione">Education</strong>
+                <p data-en="Master in International Management – LUISS Business School (Dean's List)" data-it="Master in International Management – LUISS Business School (Dean's List)">Master in International Management – LUISS Business School (Dean's List)</p>
+            </div>
+
+            <div class="highlight-item">
+                <strong data-en="Honors" data-it="Riconoscimenti">Honors</strong>
+                <p data-en="Selected for the Dean's List & Student Excellence Program at LUISS" data-it="Selezionata per la Dean's List e il Student Excellence Program alla LUISS">Selected for the Dean's List & Student Excellence Program at LUISS</p>
+            </div>
+
+            <div class="highlight-item">
+                <strong data-en="Key Strengths" data-it="Punti di Forza">Key Strengths</strong>
+                <ul>
+                    <li data-en="Global business development & cross-border market entry strategies" data-it="Business development globale e strategie di ingresso in nuovi mercati">Global business development & cross-border market entry strategies</li>
+                    <li data-en="Data-driven supply chain cost optimization (achieving 20% freight cost reduction)" data-it="Ottimizzazione dei costi di supply chain basata sui dati (riduzione del 20% dei costi di trasporto)">Data-driven supply chain cost optimization (achieving 20% freight cost reduction)</li>
+                    <li data-en="Multilingual stakeholder coordination across LATAM, Europe & Asia" data-it="Coordinamento multilingue degli stakeholder tra LATAM, Europa e Asia">Multilingual stakeholder coordination across LATAM, Europe & Asia</li>
+                </ul>
+            </div>
+        </aside>
+
     </div>
 
-    <!-- Script para cambiar el idioma -->
+    <!-- Script de traducción instantánea -->
     <script>
         function setLanguage(lang) {
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
