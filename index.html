@@ -9,13 +9,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #fafaf9;          
-            --card-bg: #ffffff;           
-            --text-main: #1c1917;         
-            --text-muted: #78716c;        
-            --accent: #b45309;            
-            --accent-hover: #92400e;      
-            --border: #e7e5e4;            
+            --bg-color: #fafaf9;
+            --card-bg: #ffffff;
+            --text-main: #1c1917;
+            --text-muted: #78716c;
+            --accent: #b45309;
+            --accent-hover: #92400e;
+            --border: #e7e5e4;
         }
 
         * {
@@ -35,7 +35,7 @@
             overflow: hidden;
         }
 
-        /* Estructura exacta de 3 columnas con scroll independiente */
+        /* Estructura de 3 columnas con scroll independiente */
         .layout-container {
             display: grid;
             grid-template-columns: 360px 1fr 340px;
@@ -45,7 +45,7 @@
             overflow: hidden;
         }
 
-        /* Columna 1: Sidebar Izquierdo */
+        /* Columna 1: Sidebar izquierdo */
         aside.left-sidebar {
             background-color: var(--card-bg);
             border-right: 1px solid var(--border);
@@ -63,6 +63,7 @@
             overflow: hidden;
             border: 2px solid var(--accent);
             background-color: var(--border);
+            flex-shrink: 0;
         }
 
         .profile-img {
@@ -94,6 +95,7 @@
             display: flex;
             gap: 1rem;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .social-icons a {
@@ -114,6 +116,10 @@
         .social-icons a:hover {
             background: var(--accent);
             color: #ffffff;
+        }
+
+        .social-icons a:hover .icon-svg {
+            stroke: #ffffff;
         }
 
         .btn-cv {
@@ -138,13 +144,6 @@
         .sidebar-info-block {
             border-top: 1px solid var(--border);
             padding-top: 1rem;
-        }
-
-        .sidebar-info-block header-with-icon {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.2rem;
         }
 
         .sidebar-info-block strong {
@@ -182,6 +181,7 @@
             font-weight: bold;
         }
 
+
         .icon-svg {
             width: 14px;
             height: 14px;
@@ -191,7 +191,7 @@
             flex-shrink: 0;
         }
 
-        /* Columna 2: Centro (Contenido Principal y Proyectos) */
+        /* Columna 2: Centro */
         main.center-content {
             padding: 2.5rem 3rem;
             overflow-y: auto;
@@ -341,6 +341,16 @@
             border-bottom: 1px solid var(--border);
         }
 
+        /* Si la imagen no se encuentra, se muestra un fondo neutro en lugar de un ícono roto */
+        .project-image-container.img-missing,
+        .profile-img-container.img-missing {
+            background: linear-gradient(135deg, #f5ede4, #e7e5e4);
+        }
+
+        .img-missing img {
+            display: none;
+        }
+
         .project-image {
             width: 100%;
             height: 100%;
@@ -396,7 +406,7 @@
             text-decoration: underline;
         }
 
-        /* Columna 3: Sidebar Derecho (Profile Highlights) */
+        /* Columna 3: Sidebar derecho */
         aside.right-sidebar {
             background-color: var(--card-bg);
             border-left: 1px solid var(--border);
@@ -488,6 +498,12 @@
             aside.left-sidebar, aside.right-sidebar {
                 border: none;
             }
+            main.center-content {
+                padding: 2rem 1.5rem;
+            }
+            .skills-columns {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -495,189 +511,191 @@
 
     <!-- Selector de idioma fijo abajo a la derecha -->
     <div class="fixed-lang-selector">
-        <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
-        <button class="lang-btn" onclick="setLanguage('es')">ES</button>
-        <button class="lang-btn" onclick="setLanguage('it')">IT</button>
+        <button type="button" class="lang-btn active" data-lang="en" onclick="setLanguage('en')">EN</button>
+        <button type="button" class="lang-btn" data-lang="es" onclick="setLanguage('es')">ES</button>
+        <button type="button" class="lang-btn" data-lang="it" onclick="setLanguage('it')">IT</button>
     </div>
 
     <div class="layout-container">
-        
+
         <!-- COLUMNA 1: SIDEBAR IZQUIERDO -->
         <aside class="left-sidebar">
             <div class="profile-img-container">
-                <img src="./assets/foto.jpg" alt="Victoria Carabajal" class="profile-img">
+                <img src="./assets/foto.jpg" data-base="./assets/foto" alt="Victoria Carabajal" class="profile-img" onerror="imgFallback(this)">
             </div>
             <div>
                 <h1>Victoria Carabajal</h1>
-                <p class="subtitle" data-en="International Trade & Business Development" data-es="Comercio Internacional & Business Development" data-it="Commercio Estero & Business Development">International Trade & Business Development</p>
+                <p class="subtitle" data-i18n="role">International Trade & Business Development</p>
             </div>
-            
-            <p class="bio" data-en="Master's graduate focused on international trade, cross-border market entry, and turning global supply chain strategies into commercial success." data-es="Graduada de Máster enfocada en comercio internacional, entrada a nuevos mercados y transformación de estrategias logísticas globales en éxito comercial." data-it="Laureata magistrale focalizzata sul commercio estero, sull'ingresso nei mercati internazionali e sulla trasformazione delle strategie di supply chain globale in successo commerciale.">Master's graduate focused on international trade, cross-border market entry, and turning global supply chain strategies into commercial success.</p>
+
+            <p class="bio" data-i18n="bio">Master's student focused on international trade, cross-border market entry, and turning global supply chain strategies into commercial success.</p>
 
             <div class="social-icons">
-                <a href="https://www.linkedin.com/in/v-carabajal/" target="_blank" rel="noreferrer">
-                    <svg class="icon-svg" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                    LinkedIn
-                </a>
+                <!-- LinkedIn sin ícono -->
+                <a href="https://www.linkedin.com/in/v-carabajal/" target="_blank" rel="noreferrer">LinkedIn</a>
                 <a href="mailto:victoriacarabajal13@gmail.com">
                     <svg class="icon-svg" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                     Email
                 </a>
             </div>
 
-            <!-- Botón de CV dinámico -->
-            <a id="cv-download-btn" href="./documentos/cv-victoria.pdf.pdf" class="btn-cv" download data-en-href="./documentos/cv-victoria.pdf.pdf" data-es-href="./documentos/cv-victoria-es.pdf.pdf" data-it-href="./documentos/cv-victoria-it.pdf.pdf" data-en="Download CV" data-es="Descargar CV" data-it="Scarica CV">Download CV</a>
+            <!-- Botón de CV dinámico según idioma -->
+            <a id="cv-download-btn" href="./documentos/cv-victoria.pdf.pdf" class="btn-cv" download data-i18n="cv">Download CV</a>
 
-            <!-- Bloque de Habilidades Técnicas y Cost Optimization en Sidebar Izquierdo -->
-            <div class="sidebar-info-block">
-                <strong>
-                    <svg class="icon-svg" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-                    <span data-en="Technical & Core Skills" data-es="Habilidades Técnicas" data-it="Competenze Tecniche">Technical & Core Skills</span>
-                </strong>
-                <ul>
-                    <li data-en="SAP ERP & Logistics Data Analytics" data-es="SAP ERP y Analítica Logística" data-it="SAP ERP e Analisi Logistica">SAP ERP & Logistics Data Analytics</li>
-                    <li data-en="Supply Chain Cost Optimization" data-es="Optimización de Costos en Cadena de Suministro" data-it="Ottimizzazione Costi Supply Chain">Supply Chain Cost Optimization</li>
-                    <li data-en="Incoterms 2020 & Customs Compliance" data-es="Incoterms 2020 y Cumplimiento Aduanero" data-it="Incoterms 2020 e Conformità Doganale">Incoterms 2020 & Customs Compliance</li>
-                    <li data-en="Cross-Border Market Entry Modeling" data-es="Modelado de Entrada a Mercados" data-it="Modellazione Ingresso Mercati">Cross-Border Market Entry Modeling</li>
-                </ul>
-            </div>
-
+            <!-- 1) Ubicación -->
             <div class="sidebar-info-block">
                 <strong>
                     <svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                    <span data-en="Based in" data-es="Ubicación" data-it="Con sede a">Based in</span>
+                    <span data-i18n="loc_title">Based in</span>
                 </strong>
-                <span data-en="Rome, Italy · Open to global opportunities" data-es="Roma, Italia · Abierta a oportunidades globales" data-it="Roma, Italia · Aperta a opportunità globali">Rome, Italy · Open to global opportunities</span>
+                <span data-i18n="loc_text">Rome, Italy · Open to global opportunities</span>
             </div>
 
+            <!-- 2) Idiomas -->
             <div class="sidebar-info-block">
                 <strong>
                     <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                    <span data-en="Languages" data-es="Idiomas" data-it="Lingue">Languages</span>
+                    <span data-i18n="lang_title">Languages</span>
                 </strong>
-                <span data-en="Spanish (Native) · English (C1) · Italian (B2)" data-es="Español (Nativo) · Inglés (C1) · Italiano (B2)" data-it="Spagnolo (Madrelingua) · Inglese (C1) · Italiano (B2)">Spanish (Native) · English (C1) · Italian (B2)</span>
+                <span data-i18n="lang_text">Spanish (Native) · English (C1) · Italian (B2) · Portuguese (A2) · German (A1) · Mandarin Chinese (A1)</span>
+            </div>
+
+            <!-- 3) Habilidades -->
+            <div class="sidebar-info-block">
+                <strong>
+                    <svg class="icon-svg" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                    <span data-i18n="skills_title">Technical & Core Skills</span>
+                </strong>
+                <ul>
+                    <li data-i18n="sk_excel">Microsoft Excel</li>
+                    <li data-i18n="sk_erp">ERP Systems (SAP, Oracle, NetSuite)</li>
+                    <li data-i18n="sk_bi">Data Visualization (Power BI, Tableau)</li>
+                    <li data-i18n="sk_crm">CRM Tools (Salesforce, HubSpot)</li>
+                    <li data-i18n="sk_cost">Supply Chain Cost Optimization</li>
+                    <li data-i18n="sk_incoterms">Incoterms 2020 & Customs Compliance</li>
+                    <li data-i18n="sk_market">Cross-Border Market Entry Modeling</li>
+                </ul>
             </div>
         </aside>
 
         <!-- COLUMNA 2: CONTENIDO PRINCIPAL Y PROYECTOS -->
         <main class="center-content">
-            <!-- Navegación superior -->
+            <!-- Navegación superior (sin "Resume") -->
             <nav class="top-nav">
                 <div class="nav-tabs">
-                    <a href="#overview" data-en="Overview" data-es="Resumen" data-it="Panoramica">Overview</a>
-                    <a href="#work" data-en="Selected Work" data-es="Proyectos" data-it="Progetti Selezionati">Selected Work</a>
-                    <a href="#resume" data-en="Resume" data-es="Currículum" data-it="Curriculum">Resume</a>
+                    <a href="#overview" data-i18n="nav_overview">Overview</a>
+                    <a href="#work" data-i18n="nav_work">Selected Work</a>
                 </div>
                 <div class="nav-right-icons">
                     <a href="https://www.linkedin.com/in/v-carabajal/" target="_blank" rel="noreferrer">LinkedIn</a>
                 </div>
             </nav>
 
-            <!-- Overview Section -->
+            <!-- Overview -->
             <section id="overview" class="hero-section">
-                <h2 data-en="Driving international trade and global expansion through <span>strategy, market analysis, and execution.</span>" data-es="Impulsando el comercio internacional y la expansión global a través de <span>estrategia, análisis de mercado y ejecución.</span>" data-it="Guidare il commercio estero e l'espansione globale attraverso <span>strategia, analisi di mercato ed esecuzione.</span>">Driving international trade and global expansion through <span>strategy, market analysis, and execution.</span></h2>
-                <p data-en="From navigating international trade regulations and supply chains to designing scalable business development models. Explore my portfolio of master's projects where global commerce meets commercial reality." data-es="Desde la gestión de normativas de comercio internacional y cadenas de suministro hasta el diseño de modelos escalables de desarrollo de negocios. Explora mi portfolio de proyectos académicos donde el comercio global se encuentra con la realidad comercial." data-it="Dalla gestione delle normative del commercio internazionale e delle supply chain alla progettazione di modelli di business development scalabili. Esplora il mio portfolio di progetti magistrali in cui il commercio globale incontra la realtà commerciale.">From navigating international trade regulations and supply chains to designing scalable business development models. Explore my portfolio of master's projects where global commerce meets commercial reality.</p>
+                <h2 data-i18n="hero_title">Driving international trade and global expansion through <span>strategy, market analysis, and execution.</span></h2>
+                <p data-i18n="hero_text">From navigating international trade regulations and supply chains to designing scalable business development models. Explore my portfolio of master's projects where global commerce meets commercial reality.</p>
             </section>
 
-            <!-- Core Skills & Focus -->
+            <!-- Core Focus Areas -->
             <section class="skills-grid-section">
                 <h3 class="skills-title">
                     <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                    <span data-en="Core Focus Areas" data-es="Áreas de Enfoque" data-it="Aree di Focus">Core Focus Areas</span>
+                    <span data-i18n="focus_title">Core Focus Areas</span>
                 </h3>
                 <div class="skills-columns">
                     <div class="skill-column">
                         <h4>
                             <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                            <span data-en="International Trade" data-es="Comercio Internacional" data-it="Commercio Estero">International Trade</span>
+                            <span data-i18n="f1_t">International Trade</span>
                         </h4>
-                        <p data-en="Import/export operations, customs compliance, Incoterms 2020 and multi-modal logistics coordination." data-es="Operaciones de importación/exportación, cumplimiento aduanero, Incoterms 2020 y coordinación logística multimodal." data-it="Operazioni di import/export, conformità doganale, Incoterms 2020 e coordinamento logistico multimodale.">Import/export operations, customs compliance, Incoterms 2020 and multi-modal logistics coordination.</p>
+                        <p data-i18n="f1_d">Import/export operations, customs compliance, Incoterms 2020 and multi-modal logistics coordination.</p>
                     </div>
                     <div class="skill-column">
                         <h4>
                             <svg class="icon-svg" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                            <span data-en="Business Development" data-es="Business Development" data-it="Business Development">Business Development</span>
+                            <span data-i18n="f2_t">Business Development</span>
                         </h4>
-                        <p data-en="Cross-border market entry, B2B lead generation, strategic partnerships and channel expansion." data-es="Entrada a nuevos mercados transfronterizos, generación de leads B2B, alianzas estratégicas y expansión de canales." data-it="Ingresso in nuovi mercati, lead generation B2B, partnership strategiche ed espansione dei canali.">Cross-border market entry, B2B lead generation, strategic partnerships and channel expansion.</p>
+                        <p data-i18n="f2_d">Cross-border market entry, B2B lead generation, strategic partnerships and channel expansion.</p>
                     </div>
                     <div class="skill-column">
                         <h4>
                             <svg class="icon-svg" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-                            <span data-en="Strategy & Supply Chain" data-es="Estrategia y Supply Chain" data-it="Strategia & Supply Chain">Strategy & Supply Chain</span>
+                            <span data-i18n="f3_t">Strategy & Supply Chain</span>
                         </h4>
-                        <p data-en="Cost optimization, vendor negotiation, market assessment and data-driven operational scaling." data-es="Optimización de costos, negociación con proveedores, evaluación de mercado y escalado operativo basado en datos." data-it="Ottimizzazione dei costi, negoziazione con i fornitori, valutazione del mercato e scalabilità operativa basata sui dati.">Cost optimization, vendor negotiation, market assessment and data-driven operational scaling.</p>
+                        <p data-i18n="f3_d">Cost optimization, vendor negotiation, market assessment and data-driven operational scaling.</p>
                     </div>
                 </div>
             </section>
 
             <!-- Selected Work -->
             <section id="work">
-                <h3 class="section-heading" data-en="Selected Work" data-es="Proyectos Seleccionados" data-it="Progetti Selezionati">Selected Work</h3>
+                <h3 class="section-heading" data-i18n="work_title">Selected Work</h3>
                 <div class="projects-list">
-                    
+
                     <!-- 1. AMAZON LEO -->
                     <article class="project-card featured">
                         <div class="project-image-container">
-                            <img src="./assets/amazon-cover.jpg" alt="Amazon LEO Project Preview" class="project-image">
+                            <img src="./assets/amazon-cover.jpg" data-base="./assets/amazon-cover" alt="Amazon LEO Project Preview" class="project-image" onerror="imgFallback(this)">
                         </div>
                         <div class="project-content">
-                            <h3>Amazon LEO: Market Entry Strategy in Italy</h3>
-                            <p>Comprehensive market entry plan and hybrid expansion strategy to bridge the rural digital divide via LEO satellites and AWS cloud integration in Italy.</p>
+                            <h3 data-i18n="p1_t">Amazon LEO: Market Entry Strategy in Italy</h3>
+                            <p data-i18n="p1_d">Comprehensive market entry plan and hybrid expansion strategy to bridge the rural digital divide via LEO satellites and AWS cloud integration in Italy.</p>
                             <div class="project-tags">
-                                <span class="project-tag">Market Entry</span>
-                                <span class="project-tag">Hybrid Strategy</span>
+                                <span class="project-tag" data-i18n="tag_market_entry">Market Entry</span>
+                                <span class="project-tag" data-i18n="tag_hybrid">Hybrid Strategy</span>
                                 <span class="project-tag">AWS Cloud</span>
                             </div>
-                            <a href="./documentos/amazon-leo.pdf.pdf" target="_blank" class="project-action-link" data-en="View Strategy PDF &rarr;" data-es="Ver PDF Estratégico &rarr;" data-it="Visualizza PDF Strategico &rarr;">View Strategy PDF &rarr;</a>
+                            <a href="./documentos/amazon-leo.pdf.pdf" target="_blank" class="project-action-link" data-i18n="link_strategy">View Strategy PDF &rarr;</a>
                         </div>
                     </article>
 
                     <!-- 2. ENEL -->
                     <article class="project-card">
                         <div class="project-image-container">
-                            <img src="./assets/enel-cover.jpg" alt="Enel Strategy Project Preview" class="project-image">
+                            <img src="./assets/enel-cover.jpg" data-base="./assets/enel-cover" alt="Enel Strategy Project Preview" class="project-image" onerror="imgFallback(this)">
                         </div>
                         <div class="project-content">
-                            <h3>Enel S.p.A.: Grids-Led Energy-as-Infrastructure Strategy</h3>
-                            <p>Strategic analysis and 2025-2027 plan evaluation focusing on European electricity grid leadership, portfolio optimization, and asset rotation.</p>
+                            <h3 data-i18n="p2_t">Enel S.p.A.: Grids-Led Energy-as-Infrastructure Strategy</h3>
+                            <p data-i18n="p2_d">Strategic analysis and 2025-2027 plan evaluation focusing on European electricity grid leadership, portfolio optimization, and asset rotation.</p>
                             <div class="project-tags">
-                                <span class="project-tag">Energy Infrastructure</span>
-                                <span class="project-tag">Portfolio Optimization</span>
+                                <span class="project-tag" data-i18n="tag_energy">Energy Infrastructure</span>
+                                <span class="project-tag" data-i18n="tag_portfolio">Portfolio Optimization</span>
                             </div>
-                            <a href="./documentos/enel-strategy.pdf.pdf" target="_blank" class="project-action-link" data-en="View Project PDF &rarr;" data-es="Ver PDF del Proyecto &rarr;" data-it="Visualizza PDF del Progetto &rarr;">View Project PDF &rarr;</a>
+                            <a href="./documentos/enel-strategy.pdf.pdf" target="_blank" class="project-action-link" data-i18n="link_project">View Project PDF &rarr;</a>
                         </div>
                     </article>
 
                     <!-- 3. SOGRAPE -->
                     <article class="project-card">
                         <div class="project-image-container">
-                            <img src="./assets/sogrape-cover.jpg" alt="Sogrape Project Preview" class="project-image">
+                            <img src="./assets/sogrape-cover.jpg" data-base="./assets/sogrape-cover" alt="Sogrape Project Preview" class="project-image" onerror="imgFallback(this)">
                         </div>
                         <div class="project-content">
-                            <h3>Sogrape: External Growth & Global Footprint</h3>
-                            <p>Evaluation of alliances, joint ventures, and M&A strategies in the global wine industry, benchmarking premiumization and lifestyle ecosystem models.</p>
+                            <h3 data-i18n="p3_t">Sogrape: External Growth & Global Footprint</h3>
+                            <p data-i18n="p3_d">Evaluation of alliances, joint ventures, and M&A strategies in the global wine industry, benchmarking premiumization and lifestyle ecosystem models.</p>
                             <div class="project-tags">
-                                <span class="project-tag">M&A & Alliances</span>
-                                <span class="project-tag">Global Footprint</span>
+                                <span class="project-tag" data-i18n="tag_ma">M&A & Alliances</span>
+                                <span class="project-tag" data-i18n="tag_footprint">Global Footprint</span>
                             </div>
-                            <a href="./documentos/sogrape.pdf.pdf" target="_blank" class="project-action-link" data-en="View Project PDF &rarr;" data-es="Ver PDF del Proyecto &rarr;" data-it="Visualizza PDF del Progetto &rarr;">View Project PDF &rarr;</a>
+                            <a href="./documentos/sogrape.pdf.pdf" target="_blank" class="project-action-link" data-i18n="link_project">View Project PDF &rarr;</a>
                         </div>
                     </article>
 
                     <!-- 4. OATLY -->
                     <article class="project-card">
                         <div class="project-image-container">
-                            <img src="./assets/oatly-cover.jpg" alt="Oatly Argentina Project Preview" class="project-image">
+                            <img src="./assets/oatly-cover.jpg" data-base="./assets/oatly-cover" alt="Oatly Argentina Project Preview" class="project-image" onerror="imgFallback(this)">
                         </div>
                         <div class="project-content">
-                            <h3>Oatly Argentina: Strategic Internationalization Project</h3>
-                            <p>Comprehensive market entry strategy, comparative market analysis for target selection, pricing strategy, Incoterms definition, and full export logistics cost calculation.</p>
+                            <h3 data-i18n="p4_t">Oatly Argentina: Strategic Internationalization Project</h3>
+                            <p data-i18n="p4_d">Comprehensive market entry strategy, comparative market analysis for target selection, pricing strategy, Incoterms definition, and full export logistics cost calculation.</p>
                             <div class="project-tags">
-                                <span class="project-tag">Market Entry</span>
-                                <span class="project-tag">Export Logistics</span>
+                                <span class="project-tag" data-i18n="tag_market_entry">Market Entry</span>
+                                <span class="project-tag" data-i18n="tag_export">Export Logistics</span>
                                 <span class="project-tag">Incoterms 2020</span>
                             </div>
-                            <a href="./documentos/oatly-argentina.pdf.pdf" target="_blank" class="project-action-link" data-en="View Strategy PDF &rarr;" data-es="Ver PDF Estratégico &rarr;" data-it="Visualizza PDF Strategico &rarr;">View Strategy PDF &rarr;</a>
+                            <a href="./documentos/oatly-argentina.pdf.pdf" target="_blank" class="project-action-link" data-i18n="link_strategy">View Strategy PDF &rarr;</a>
                         </div>
                     </article>
 
@@ -686,74 +704,301 @@
         </main>
 
         <!-- COLUMNA 3: SIDEBAR DERECHO (PROFILE HIGHLIGHTS) -->
-        <aside id="resume" class="right-sidebar">
-            <h3 data-en="Profile Highlights" data-es="Puntos Destacados" data-it="Punti di Forza del Profilo">
+        <aside class="right-sidebar">
+            <h3>
                 <svg class="icon-svg" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                Profile Highlights
+                <span data-i18n="hl_title">Profile Highlights</span>
             </h3>
-            
+
             <div class="highlight-item">
-                <strong data-en="Experience" data-es="Experiencia" data-it="Esperienza">
+                <strong>
                     <svg class="icon-svg" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-                    Experience
+                    <span data-i18n="exp_t">Experience</span>
                 </strong>
-                <p data-en="3+ years in international trade operations and supply chain management." data-es="Más de 3 años en operaciones de comercio internacional y gestión de cadena de suministro." data-it="3+ anni in operazioni di commercio estero e gestione della supply chain.">3+ years in international trade operations and supply chain management.</p>
+                <p data-i18n="exp_d">3+ years in international trade operations and supply chain management.</p>
             </div>
 
             <div class="highlight-item">
-                <strong data-en="Education" data-es="Educación" data-it="Formazione">
+                <strong>
                     <svg class="icon-svg" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
-                    Education
+                    <span data-i18n="edu_t">Education</span>
                 </strong>
-                <p data-en="Master in International Management – LUISS Business School (Dean's List)" data-es="Máster en International Management – LUISS Business School (Dean's List)" data-it="Master in International Management – LUISS Business School (Dean's List)">Master in International Management – LUISS Business School (Dean's List)</p>
+                <p data-i18n="edu_d">Master in International Management – LUISS Business School</p>
             </div>
 
             <div class="highlight-item">
-                <strong data-en="Honors" data-es="Méritos y Honores" data-it="Riconoscimenti">
+                <strong>
                     <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>
-                    Honors
+                    <span data-i18n="hon_t">Honors</span>
                 </strong>
-                <p data-en="Selected for the Dean's List & Student Excellence Program at LUISS" data-es="Seleccionada para la Dean's List y el Programa de Excelencia Estudiantil en LUISS" data-it="Selezionata per la Dean's List e il Student Excellence Program alla LUISS">Selected for the Dean's List & Student Excellence Program at LUISS</p>
+                <p data-i18n="hon_d">Selected for the Dean's List & Student Excellence Program at LUISS</p>
             </div>
 
             <div class="highlight-item">
-                <strong data-en="Key Strengths" data-es="Fortalezas Clave" data-it="Punti di Forza">
+                <strong>
                     <svg class="icon-svg" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                    Key Strengths
+                    <span data-i18n="str_t">Key Strengths</span>
                 </strong>
                 <ul>
-                    <li data-en="Global business development & cross-border market entry strategies" data-es="Desarrollo de negocios globales y estrategias de entrada a nuevos mercados" data-it="Business development globale e strategie di ingresso in nuovi mercati">Global business development & cross-border market entry strategies</li>
-                    <li data-en="Data-driven supply chain cost optimization (achieving 20% freight cost reduction)" data-es="Optimización de costos logísticos basada en datos (logrando una reducción del 20% en fletes)" data-it="Ottimizzazione dei costi di supply chain basata sui dati">Data-driven supply chain cost optimization (achieving 20% freight cost reduction)</li>
-                    <li data-en="Multilingual stakeholder coordination across LATAM, Europe & Asia" data-es="Coordinación de stakeholders multilingües en LATAM, Europa y Asia" data-it="Coordinamento multilingue degli stakeholder tra LATAM, Europa e Asia">Multilingual stakeholder coordination across LATAM, Europe & Asia</li>
+                    <li data-i18n="st1">Global business development & cross-border market entry strategies</li>
+                    <li data-i18n="st2">Data-driven supply chain cost optimization (achieving 20% freight cost reduction)</li>
+                    <li data-i18n="st3">End-to-end international logistics (90+ operations with 100% accurate documentation)</li>
+                    <li data-i18n="st4">Supplier & freight forwarder management (20+ suppliers, 4 major forwarders)</li>
+                    <li data-i18n="st5">B2B lead generation & competitor analysis (40+ potential partners, 5+ competitors)</li>
+                    <li data-i18n="st6">Cross-functional coordination of 10+ stakeholders in international expansion projects</li>
+                    <li data-i18n="st7">Multilingual stakeholder coordination across LATAM, Europe & Asia</li>
                 </ul>
             </div>
         </aside>
 
     </div>
 
-    <!-- Script de traducción robusto y dinámico -->
     <script>
-        function setLanguage(lang) {
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+        /* ---------- Traducciones ---------- */
+        const i18n = {
+            en: {
+                role: "International Trade & Business Development",
+                bio: "Master's student focused on international trade, cross-border market entry, and turning global supply chain strategies into commercial success.",
+                cv: "Download CV",
+                loc_title: "Based in",
+                loc_text: "Rome, Italy · Open to global opportunities",
+                lang_title: "Languages",
+                lang_text: "Spanish (Native) · English (C1) · Italian (B2) · Portuguese (A2) · German (A1) · Mandarin Chinese (A1)",
+                skills_title: "Technical & Core Skills",
+                sk_excel: "Microsoft Excel",
+                sk_erp: "ERP Systems (SAP, Oracle, NetSuite)",
+                sk_bi: "Data Visualization (Power BI, Tableau)",
+                sk_crm: "CRM Tools (Salesforce, HubSpot)",
+                sk_cost: "Supply Chain Cost Optimization",
+                sk_incoterms: "Incoterms 2020 & Customs Compliance",
+                sk_market: "Cross-Border Market Entry Modeling",
+                nav_overview: "Overview",
+                nav_work: "Selected Work",
+                hero_title: "Driving international trade and global expansion through <span>strategy, market analysis, and execution.</span>",
+                hero_text: "From navigating international trade regulations and supply chains to designing scalable business development models. Explore my portfolio of master's projects where global commerce meets commercial reality.",
+                focus_title: "Core Focus Areas",
+                f1_t: "International Trade",
+                f1_d: "Import/export operations, customs compliance, Incoterms 2020 and multi-modal logistics coordination.",
+                f2_t: "Business Development",
+                f2_d: "Cross-border market entry, B2B lead generation, strategic partnerships and channel expansion.",
+                f3_t: "Strategy & Supply Chain",
+                f3_d: "Cost optimization, vendor negotiation, market assessment and data-driven operational scaling.",
+                work_title: "Selected Work",
+                p1_t: "Amazon LEO: Market Entry Strategy in Italy",
+                p1_d: "Comprehensive market entry plan and hybrid expansion strategy to bridge the rural digital divide via LEO satellites and AWS cloud integration in Italy.",
+                p2_t: "Enel S.p.A.: Grids-Led Energy-as-Infrastructure Strategy",
+                p2_d: "Strategic analysis and 2025-2027 plan evaluation focusing on European electricity grid leadership, portfolio optimization, and asset rotation.",
+                p3_t: "Sogrape: External Growth & Global Footprint",
+                p3_d: "Evaluation of alliances, joint ventures, and M&A strategies in the global wine industry, benchmarking premiumization and lifestyle ecosystem models.",
+                p4_t: "Oatly Argentina: Strategic Internationalization Project",
+                p4_d: "Comprehensive market entry strategy, comparative market analysis for target selection, pricing strategy, Incoterms definition, and full export logistics cost calculation.",
+                tag_market_entry: "Market Entry",
+                tag_hybrid: "Hybrid Strategy",
+                tag_energy: "Energy Infrastructure",
+                tag_portfolio: "Portfolio Optimization",
+                tag_ma: "M&A & Alliances",
+                tag_footprint: "Global Footprint",
+                tag_export: "Export Logistics",
+                link_strategy: "View Strategy PDF &rarr;",
+                link_project: "View Project PDF &rarr;",
+                hl_title: "Profile Highlights",
+                exp_t: "Experience",
+                exp_d: "3+ years in international trade operations and supply chain management.",
+                edu_t: "Education",
+                edu_d: "Master in International Management – LUISS Business School",
+                hon_t: "Honors",
+                hon_d: "Selected for the Dean's List & Student Excellence Program at LUISS",
+                str_t: "Key Strengths",
+                st1: "Global business development & cross-border market entry strategies",
+                st2: "Data-driven supply chain cost optimization (achieving 20% freight cost reduction)",
+                st3: "End-to-end international logistics (90+ operations with 100% accurate documentation)",
+                st4: "Supplier & freight forwarder management (20+ suppliers, 4 major forwarders)",
+                st5: "B2B lead generation & competitor analysis (40+ potential partners, 5+ competitors)",
+                st6: "Cross-functional coordination of 10+ stakeholders in international expansion projects",
+                st7: "Multilingual stakeholder coordination across LATAM, Europe & Asia"
+            },
+            es: {
+                role: "Comercio Internacional & Business Development",
+                bio: "Estudiante de Máster enfocada en comercio internacional, entrada a nuevos mercados y transformación de estrategias logísticas globales en éxito comercial.",
+                cv: "Descargar CV",
+                loc_title: "Ubicación",
+                loc_text: "Roma, Italia · Abierta a oportunidades globales",
+                lang_title: "Idiomas",
+                lang_text: "Español (Nativo) · Inglés (C1) · Italiano (B2) · Portugués (A2) · Alemán (A1) · Chino mandarín (A1)",
+                skills_title: "Habilidades Técnicas",
+                sk_excel: "Microsoft Excel",
+                sk_erp: "Sistemas ERP (SAP, Oracle, NetSuite)",
+                sk_bi: "Visualización de Datos (Power BI, Tableau)",
+                sk_crm: "Herramientas CRM (Salesforce, HubSpot)",
+                sk_cost: "Optimización de Costos en Cadena de Suministro",
+                sk_incoterms: "Incoterms 2020 y Cumplimiento Aduanero",
+                sk_market: "Modelado de Entrada a Mercados",
+                nav_overview: "Resumen",
+                nav_work: "Proyectos",
+                hero_title: "Impulsando el comercio internacional y la expansión global a través de <span>estrategia, análisis de mercado y ejecución.</span>",
+                hero_text: "Desde la gestión de normativas de comercio internacional y cadenas de suministro hasta el diseño de modelos escalables de desarrollo de negocios. Explora mi portfolio de proyectos académicos donde el comercio global se encuentra con la realidad comercial.",
+                focus_title: "Áreas de Enfoque",
+                f1_t: "Comercio Internacional",
+                f1_d: "Operaciones de importación/exportación, cumplimiento aduanero, Incoterms 2020 y coordinación logística multimodal.",
+                f2_t: "Business Development",
+                f2_d: "Entrada a nuevos mercados transfronterizos, generación de leads B2B, alianzas estratégicas y expansión de canales.",
+                f3_t: "Estrategia y Supply Chain",
+                f3_d: "Optimización de costos, negociación con proveedores, evaluación de mercado y escalado operativo basado en datos.",
+                work_title: "Proyectos Seleccionados",
+                p1_t: "Amazon LEO: Estrategia de Entrada al Mercado en Italia",
+                p1_d: "Plan integral de entrada al mercado y estrategia de expansión híbrida para reducir la brecha digital rural mediante satélites LEO e integración con la nube de AWS en Italia.",
+                p2_t: "Enel S.p.A.: Estrategia de Energía como Infraestructura Liderada por Redes",
+                p2_d: "Análisis estratégico y evaluación del plan 2025-2027 centrados en el liderazgo en redes eléctricas europeas, la optimización de portafolio y la rotación de activos.",
+                p3_t: "Sogrape: Crecimiento Externo y Presencia Global",
+                p3_d: "Evaluación de alianzas, joint ventures y estrategias de M&A en la industria vitivinícola global, con benchmarking de premiumización y modelos de ecosistema de estilo de vida.",
+                p4_t: "Oatly Argentina: Proyecto Estratégico de Internacionalización",
+                p4_d: "Estrategia integral de entrada al mercado, análisis comparativo de mercados para la selección del país objetivo, estrategia de precios, definición de Incoterms y cálculo completo de costos logísticos de exportación.",
+                tag_market_entry: "Entrada a Mercados",
+                tag_hybrid: "Estrategia Híbrida",
+                tag_energy: "Infraestructura Energética",
+                tag_portfolio: "Optimización de Portafolio",
+                tag_ma: "M&A y Alianzas",
+                tag_footprint: "Presencia Global",
+                tag_export: "Logística de Exportación",
+                link_strategy: "Ver PDF Estratégico &rarr;",
+                link_project: "Ver PDF del Proyecto &rarr;",
+                hl_title: "Puntos Destacados",
+                exp_t: "Experiencia",
+                exp_d: "Más de 3 años en operaciones de comercio internacional y gestión de cadena de suministro.",
+                edu_t: "Educación",
+                edu_d: "Máster en International Management – LUISS Business School",
+                hon_t: "Méritos y Honores",
+                hon_d: "Seleccionada para la Dean's List y el Programa de Excelencia Estudiantil en LUISS",
+                str_t: "Fortalezas Clave",
+                st1: "Desarrollo de negocios globales y estrategias de entrada a nuevos mercados",
+                st2: "Optimización de costos logísticos basada en datos (logrando una reducción del 20% en fletes)",
+                st3: "Logística internacional de punta a punta (más de 90 operaciones con 100% de precisión documental)",
+                st4: "Gestión de proveedores y agentes de carga (más de 20 proveedores, 4 forwarders principales)",
+                st5: "Generación de leads B2B y análisis de competidores (más de 40 potenciales socios, más de 5 competidores)",
+                st6: "Coordinación interfuncional de más de 10 stakeholders en proyectos de expansión internacional",
+                st7: "Coordinación de stakeholders multilingües en LATAM, Europa y Asia"
+            },
+            it: {
+                role: "Commercio Estero & Business Development",
+                bio: "Studentessa di Master focalizzata sul commercio estero, sull'ingresso nei mercati internazionali e sulla trasformazione delle strategie di supply chain globale in successo commerciale.",
+                cv: "Scarica CV",
+                loc_title: "Con sede a",
+                loc_text: "Roma, Italia · Aperta a opportunità globali",
+                lang_title: "Lingue",
+                lang_text: "Spagnolo (Madrelingua) · Inglese (C1) · Italiano (B2) · Portoghese (A2) · Tedesco (A1) · Cinese mandarino (A1)",
+                skills_title: "Competenze Tecniche",
+                sk_excel: "Microsoft Excel",
+                sk_erp: "Sistemi ERP (SAP, Oracle, NetSuite)",
+                sk_bi: "Visualizzazione dei Dati (Power BI, Tableau)",
+                sk_crm: "Strumenti CRM (Salesforce, HubSpot)",
+                sk_cost: "Ottimizzazione Costi Supply Chain",
+                sk_incoterms: "Incoterms 2020 e Conformità Doganale",
+                sk_market: "Modellazione Ingresso Mercati",
+                nav_overview: "Panoramica",
+                nav_work: "Progetti Selezionati",
+                hero_title: "Guidare il commercio estero e l'espansione globale attraverso <span>strategia, analisi di mercato ed esecuzione.</span>",
+                hero_text: "Dalla gestione delle normative del commercio internazionale e delle supply chain alla progettazione di modelli di business development scalabili. Esplora il mio portfolio di progetti magistrali in cui il commercio globale incontra la realtà commerciale.",
+                focus_title: "Aree di Focus",
+                f1_t: "Commercio Estero",
+                f1_d: "Operazioni di import/export, conformità doganale, Incoterms 2020 e coordinamento logistico multimodale.",
+                f2_t: "Business Development",
+                f2_d: "Ingresso in nuovi mercati, lead generation B2B, partnership strategiche ed espansione dei canali.",
+                f3_t: "Strategia & Supply Chain",
+                f3_d: "Ottimizzazione dei costi, negoziazione con i fornitori, valutazione del mercato e scalabilità operativa basata sui dati.",
+                work_title: "Progetti Selezionati",
+                p1_t: "Amazon LEO: Strategia di Ingresso nel Mercato Italiano",
+                p1_d: "Piano completo di ingresso nel mercato e strategia di espansione ibrida per ridurre il divario digitale nelle aree rurali tramite satelliti LEO e integrazione con il cloud AWS in Italia.",
+                p2_t: "Enel S.p.A.: Strategia Energy-as-Infrastructure Guidata dalle Reti",
+                p2_d: "Analisi strategica e valutazione del piano 2025-2027 incentrate sulla leadership nelle reti elettriche europee, sull'ottimizzazione del portafoglio e sulla rotazione degli asset.",
+                p3_t: "Sogrape: Crescita Esterna e Presenza Globale",
+                p3_d: "Valutazione di alleanze, joint venture e strategie di M&A nell'industria vinicola globale, con benchmarking di premiumization e modelli di ecosistema lifestyle.",
+                p4_t: "Oatly Argentina: Progetto Strategico di Internazionalizzazione",
+                p4_d: "Strategia completa di ingresso nel mercato, analisi comparativa dei mercati per la selezione del paese target, strategia di prezzo, definizione degli Incoterms e calcolo completo dei costi logistici di esportazione.",
+                tag_market_entry: "Ingresso nei Mercati",
+                tag_hybrid: "Strategia Ibrida",
+                tag_energy: "Infrastrutture Energetiche",
+                tag_portfolio: "Ottimizzazione del Portafoglio",
+                tag_ma: "M&A e Alleanze",
+                tag_footprint: "Presenza Globale",
+                tag_export: "Logistica dell'Export",
+                link_strategy: "Visualizza PDF Strategico &rarr;",
+                link_project: "Visualizza PDF del Progetto &rarr;",
+                hl_title: "Punti di Forza del Profilo",
+                exp_t: "Esperienza",
+                exp_d: "3+ anni in operazioni di commercio estero e gestione della supply chain.",
+                edu_t: "Formazione",
+                edu_d: "Master in International Management – LUISS Business School",
+                hon_t: "Riconoscimenti",
+                hon_d: "Selezionata per la Dean's List e il Student Excellence Program alla LUISS",
+                str_t: "Punti di Forza",
+                st1: "Business development globale e strategie di ingresso in nuovi mercati",
+                st2: "Ottimizzazione dei costi di supply chain basata sui dati (riduzione del 20% dei costi di trasporto)",
+                st3: "Logistica internazionale end-to-end (90+ operazioni con documentazione accurata al 100%)",
+                st4: "Gestione di fornitori e spedizionieri (20+ fornitori, 4 spedizionieri principali)",
+                st5: "Lead generation B2B e analisi dei competitor (40+ potenziali partner, 5+ competitor)",
+                st6: "Coordinamento cross-funzionale di 10+ stakeholder in progetti di espansione internazionale",
+                st7: "Coordinamento multilingue degli stakeholder tra LATAM, Europa e Asia"
+            }
+        };
 
-            // Traducir todos los elementos marcados con atributos data-en
-            document.querySelectorAll('[data-en]').forEach(el => {
-                if (lang === 'es' && el.getAttribute('data-es')) {
-                    el.innerHTML = el.getAttribute('data-es');
-                } else if (lang === 'it' && el.getAttribute('data-it')) {
-                    el.innerHTML = el.getAttribute('data-it');
-                } else if (lang === 'en' && el.getAttribute('data-en')) {
-                    el.innerHTML = el.getAttribute('data-en');
-                }
+        const cvLinks = {
+            en: "./documentos/cv-victoria.pdf.pdf",
+            es: "./documentos/cv-victoria.pdf.pdf", // cambiar por cv-victoria-es.pdf.pdf cuando tengas la versión en español
+            it: "./documentos/cv-victoria.pdf.pdf" // cambiar por cv-victoria-it.pdf.pdf cuando tengas la versión en italiano
+        };
+
+        function setLanguage(lang) {
+            if (!i18n[lang]) lang = 'en';
+
+            document.documentElement.lang = lang;
+
+            // Marcar el botón activo
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
             });
 
-            // Actualizar el enlace de descarga del CV según el idioma
+            // Traducir cada elemento que tenga data-i18n
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const text = i18n[lang][el.dataset.i18n];
+                if (text !== undefined) el.innerHTML = text;
+            });
+
+            // Actualizar el enlace del CV
             const cvBtn = document.getElementById('cv-download-btn');
-            if (cvBtn) {
-                if (lang === 'es' && cvBtn.getAttribute('data-es-href')) {
-                    cvBtn.setAttribute('href
-            // Cambiar dinámicamente el enlace de descarga del CV según el idioma activo
-            const cvBtn = document.getElementById('cv-download-btn');
-            if (cvBtn) {
-                if
+            if (cvBtn) cvBtn.setAttribute('href', cvLinks[lang]);
+
+            try { localStorage.setItem('portfolio-lang', lang); } catch (e) {}
+        }
+
+        /* ---------- Imágenes: prueba otras extensiones si la principal falla ---------- */
+        const imgExts = ['jpeg', 'png', 'webp', 'JPG', 'JPEG', 'PNG', 'jpg.jpg', 'jpeg.jpeg', 'png.png', 'jpg.jpeg', 'jpeg.jpg'];
+
+        function imgFallback(img) {
+            const i = parseInt(img.dataset.try || '0', 10);
+            if (i < imgExts.length) {
+                img.dataset.try = i + 1;
+                img.src = img.dataset.base + '.' + imgExts[i];
+            } else {
+                img.onerror = null;
+                img.parentElement.classList.add('img-missing');
+                console.warn('No se encontró la imagen:', img.dataset.base);
+            }
+        }
+
+        /* ---------- Idioma inicial: el guardado o el del navegador ---------- */
+        (function initLanguage() {
+            let lang = 'en';
+            try {
+                const saved = localStorage.getItem('portfolio-lang');
+                if (saved && i18n[saved]) {
+                    lang = saved;
+                } else {
+                    const nav = (navigator.language || 'en').slice(0, 2).toLowerCase();
+                    if (i18n[nav]) lang = nav;
+                }
+            } catch (e) {}
+            setLanguage(lang);
+        })();
+    </script>
+</body>
+</html>
