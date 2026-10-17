@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Victoria Carabajal | International Trade & Supply Chain</title>
+    <title>Victoria Carabajal | International Business Development & Trade</title>
     <style>
         :root {
-            --bg-color: #fdfdfd;           
+            --bg-color: #f8fafc;           
             --card-bg: #ffffff;            
-            --text-main: #2b3e50;          
-            --text-muted: #627d98;         
-            --accent: #0284c7;             
-            --accent-light: #e0f2fe;       
+            --text-main: #1e293b;          
+            --text-muted: #64748b;         
+            --accent: #1e3a8a;             /* Azul marino corporativo y sofisticado que combina con todo */
+            --accent-hover: #1e40af;       
+            --accent-light: #e0e7ff;       /* Tono pastel suave para etiquetas y detalles */
             --border: #e2e8f0;             
         }
 
@@ -28,7 +29,7 @@
             display: flex;
             min-height: 100vh;
             justify-content: center;
-            padding: 3rem 1.5rem;
+            padding: 2rem 1.5rem;
             position: relative;
         }
 
@@ -39,6 +40,7 @@
             right: 2rem;
             display: flex;
             gap: 0.5rem;
+            z-index: 10;
         }
 
         .lang-btn {
@@ -65,7 +67,7 @@
             gap: 2.5rem;
             max-width: 1200px;
             width: 100%;
-            margin-top: 1.5rem;
+            margin-top: 2rem;
         }
 
         @media (max-width: 900px) {
@@ -89,21 +91,24 @@
             padding: 2.5rem 2rem;
             height: fit-content;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
 
+        /* Foto de perfil en formato perfectamente circular */
         .profile-img {
-            width: 110px;
-            height: 110px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             object-fit: cover;
-            margin-bottom: 1.25rem;
             background-color: var(--border);
-            border: 3px solid #f8fafc;
+            border: 3px solid #f1f5f9;
         }
 
         aside h1 {
             font-size: 1.5rem;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.2rem;
             line-height: 1.2;
             color: #0f172a;
         }
@@ -112,14 +117,39 @@
             color: var(--accent);
             font-weight: 600;
             font-size: 0.9rem;
-            margin-bottom: 1rem;
         }
 
         aside p.bio {
             color: var(--text-muted);
             font-size: 0.9rem;
             line-height: 1.6;
-            margin-bottom: 1.75rem;
+        }
+
+        /* Enlaces sociales en el panel */
+        .social-links {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: -0.5rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background-color: var(--accent-light);
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            color: white;
         }
 
         .btn-cv {
@@ -133,33 +163,52 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 0.9rem;
-            margin-bottom: 1.75rem;
             transition: background-color 0.2s, transform 0.1s;
         }
 
         .btn-cv:hover {
-            background-color: #0369a1;
+            background-color: var(--accent-hover);
             transform: translateY(-1px);
         }
 
-        .skills-section h3 {
+        .sidebar-section {
+            border-top: 1px solid var(--border);
+            padding-top: 1.2rem;
+        }
+
+        .sidebar-section h3 {
             font-size: 0.95rem;
             margin-bottom: 0.75rem;
             color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .sidebar-section ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .sidebar-section li {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.4;
         }
 
         .tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
+            gap: 0.4rem;
         }
 
         .tag {
             background-color: var(--accent-light);
-            color: #0369a1;
+            color: var(--accent);
             font-size: 0.75rem;
-            padding: 0.35rem 0.7rem;
+            padding: 0.3rem 0.6rem;
             border-radius: 6px;
             font-weight: 600;
         }
@@ -169,6 +218,36 @@
             display: flex;
             flex-direction: column;
             gap: 2rem;
+        }
+
+        /* Navegación superior */
+        .top-nav {
+            display: flex;
+            gap: 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
         }
 
         .hero {
@@ -255,6 +334,25 @@
         .project-links a:hover {
             text-decoration: underline;
         }
+
+        /* Sección de Highlights */
+        .highlights-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+        }
+
+        .highlights-card ul {
+            list-style: disc;
+            margin-left: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
     </style>
 </head>
 <body>
@@ -268,78 +366,148 @@
     <div class="container">
         <!-- BARRA LATERAL -->
         <aside>
-            <img src="https://via.placeholder.com/110" alt="Victoria Carabajal" class="profile-img">
-            <h1>Victoria Carabajal</h1>
-            <p class="subtitle" data-en="International Trade & Supply Chain Specialist" data-it="Specialista in Commercio Estero e Supply Chain">International Trade & Supply Chain Specialist</p>
-            <p class="bio" data-en="Master's graduate in International Business. Passionate about supply chain optimization, global trade strategy, and regulatory compliance." data-it="Laureata magistrale in Business Internazionale. Appassionata di ottimizzazione della supply chain, strategia di commercio globale e conformità normativa.">Master's graduate in International Business. Passionate about supply chain optimization, global trade strategy, and regulatory compliance.</p>
+            <img src="./assets/foto.jpg" alt="Victoria Carabajal" class="profile-img">
+            <div>
+                <h1>Victoria Carabajal</h1>
+                <p class="subtitle" data-en="International Trade & Business Development" data-it="Commercio Estero & Business Development">International Trade & Business Development</p>
+            </div>
+            
+            <p class="bio" data-en="Master's graduate focused on international trade, cross-border market entry, and turning global supply chain strategies into commercial success." data-it="Laureata magistrale focalizzata sul commercio estero, sull'ingresso nei mercati internazionali e sulla trasformazione delle strategie di supply chain globale in successo commerciale.">Master's graduate focused on international trade, cross-border market entry, and turning global supply chain strategies into commercial success.</p>
+
+            <!-- Enlace directo a LinkedIn -->
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/v-carabajal/" target="_blank" aria-label="LinkedIn">in</a>
+            </div>
 
             <a href="./documentos/cv-victoria.pdf" class="btn-cv" download data-en="Download CV (PDF)" data-it="Scarica CV (PDF)">Download CV (PDF)</a>
 
-            <div class="skills-section">
-                <h3 data-en="Core Skills & Areas" data-en-it="Competenze e Aree Chiave" data-it="Competenze e Aree Chiave">Core Skills & Areas</h3>
+            <!-- Detalles del perfil -->
+            <div class="sidebar-section">
+                <h3 data-en="📍 Location" data-it="📍 Sede">📍 Location</h3>
+                <ul>
+                    <li data-en="Based in Rome, Italy" data-it="Con sede a Roma, Italia">Based in Rome, Italy</li>
+                    <li data-en="Open to international opportunities" data-it="Aperta a opportunità internazionali">Open to international opportunities</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 data-en="🗣️ Languages" data-it="🗣️ Lingue">🗣️ Lingue</h3>
+                <ul>
+                    <li data-en="Spanish (Native) · English (C1) · Italian (B2)" data-it="Spagnolo (Madrelingua) · Inglese (C1) · Italiano (B2)">Spanish (Native) · English (C1) · Italian (B2)</li>
+                    <li data-en="Portuguese (A2) · German (A1) · Mandarin (A1)" data-it="Portoghese (A2) · Tedesco (A1) · Cinese (A1)">Portuguese (A2) · German (A1) · Mandarin (A1)</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 data-en="🎓 Education" data-it="🎓 Formazione">🎓 Education</h3>
+                <ul>
+                    <li data-en="Master in International Management – LUISS Business School (Dean's List)" data-it="Master in International Management – LUISS Business School (Dean's List)">Master in International Management – LUISS Business School (Dean's List)</li>
+                    <li data-en="Bachelor's in International Trade – Universidad Empresarial Siglo 21" data-it="Laurea in Commercio Estero – Universidad Empresarial Siglo 21">Bachelor's in International Trade – Universidad Empresarial Siglo 21</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 data-en="🛠️ Expertise" data-it="🛠️ Competenze">🛠️ Competenze</h3>
                 <div class="tags">
+                    <span class="tag">Cost Optimization</span>
+                    <span class="tag">Import / Export</span>
+                    <span class="tag">Logistics Coordination</span>
+                    <span class="tag">Business Development</span>
+                    <span class="tag">Excel</span>
                     <span class="tag">Incoterms 2020</span>
-                    <span class="tag">Trade Map</span>
-                    <span class="tag">SAP</span>
-                    <span class="tag">Advanced Excel</span>
-                    <span class="tag">Multimodal Logistics</span>
-                    <span class="tag">Tariff Analysis</span>
+                    <span class="tag">SAP / Oracle</span>
+                    <span class="tag">Salesforce / HubSpot</span>
                 </div>
             </div>
         </aside>
 
         <!-- CONTENIDO PRINCIPAL -->
         <main>
-            <!-- Cabecera de bienvenida -->
-            <section class="hero">
-                <h2 data-en="Turning logistical complexity into <span>global strategy.</span>" data-it="Trasformare la complessità logistica in <span>strategia globale.</span>">Turning logistical complexity into <span>global strategy.</span></h2>
-                <p data-en="Here I showcase my practical projects, case studies, and internationalization plans developed during my master's degree, focused on solving real-world challenges in global trade." data-it="Qui presento i miei progetti pratici, casi studio e piani di internazionalizzazione sviluppati durante la mia magistrale, incentrati sulla risoluzione di sfide reali nel commercio globale.">Here I showcase my practical projects, case studies, and internationalization plans developed during my master's degree, focused on solving real-world challenges in global trade.</p>
+            <!-- Navegación superior -->
+            <nav class="top-nav">
+                <div class="nav-links">
+                    <a href="#overview" data-en="Overview" data-it="Panoramica">Overview</a>
+                    <a href="#work" data-en="Selected Work" data-it="Progetti Selezionati">Selected Work</a>
+                    <a href="#resume" data-en="Resume" data-it="Curriculum">Resume</a>
+                </div>
+            </nav>
+
+            <!-- Cabecera (Overview) -->
+            <section id="overview" class="hero">
+                <h2 data-en="Driving international trade and global expansion through strategy, market analysis, and execution." data-it="Guidare il commercio estero e l'espansione globale attraverso strategia, analisi di mercato ed esecuzione.">Driving international trade and global expansion through strategy, market analysis, and execution.</h2>
+                <p data-en="From navigating international trade regulations and supply chains to designing scalable business development models. Explore my portfolio of master's projects where global commerce meets commercial reality." data-it="Dalla gestione delle normative del commercio internazionale e delle supply chain alla progettazione di modelli di business development scalabili. Esplora il mio portfolio di progetti magistrali in cui il commercio globale incontra la realtà commerciale.">From navigating international trade regulations and supply chains to designing scalable business development models. Explore my portfolio of master's projects where global commerce meets commercial reality.</p>
             </section>
 
-            <!-- Sección de proyectos / casos de estudio -->
-            <section>
-                <h2 class="section-title" data-en="📂 Case Studies & Projects" data-it="📂 Casi Studio e Progetti">📂 Case Studies & Projects</h2>
+            <!-- Sección de proyectos (Selected Work) -->
+            <section id="work">
+                <h2 class="section-title" data-en="📂 Strategic Projects & Case Studies" data-it="📂 Progetti Strategici e Casi Studio">📂 Strategic Projects & Case Studies</h2>
                 <div class="projects-grid">
                     
-                    <!-- Proyecto 1 -->
+                    <!-- Proyecto Oatly Argentina -->
                     <article class="project-card">
-                        <h3 data-en="SME Internationalization Plan to North America" data-it="Piano di Internazionalizzazione PMI in Nord America">SME Internationalization Plan to North America</h3>
-                        <p data-en="Market analysis (PESTEL, SWOT) and distribution channel selection to introduce a wine product into the US market, successfully overcoming tariff and logistical barriers." data-it="Analisi di mercato (PESTEL, SWOT) e selezione dei canali di distribuzione per introdurre un prodotto vinicolo nel mercato statunitense, superando barriere tariffarie e logistiche.">Market analysis (PESTEL, SWOT) and distribution channel selection to introduce a wine product into the US market, successfully overcoming tariff and logistical barriers.</p>
+                        <h3 data-en="Oatly Argentina: Strategic Internationalization Project" data-it="Oatly Argentina: Progetto di Internazionalizzazione Strategica">Oatly Argentina: Strategic Internationalization Project</h3>
+                        <p data-en="Comprehensive market entry strategy, comparative market analysis for target selection, pricing strategy, Incoterms definition, and full export logistics cost calculation for a plant-based beverage expansion." data-it="Strategia di ingresso nel mercato completa, analisi comparativa per la selezione del mercato target, strategia di prezzo, definizione degli Incoterms e calcolo completo dei costi logistici di esportazione per l'espansione di bevande vegetali.">Comprehensive market entry strategy, comparative market analysis for target selection, pricing strategy, Incoterms definition, and full export logistics cost calculation for a plant-based beverage expansion.</p>
                         <div class="tags" style="margin-bottom: 1.2rem;">
-                            <span class="tag" data-en="Market Research" data-it="Analisi di Mercato">Market Research</span>
-                            <span class="tag" data-en="Tariffs" data-it="Tariffe">Tariffs</span>
+                            <span class="tag" data-en="Market Entry" data-it="Ingresso nel Mercato">Market Entry</span>
+                            <span class="tag" data-en="Export Logistics" data-it="Logistica di Esportazione">Export Logistics</span>
+                            <span class="tag">Incoterms 2020</span>
                         </div>
                         <div class="project-links">
-                            <a href="./documentos/plan-internacionalizacion.pdf" target="_blank" data-en="📄 View PDF Document" data-it="📄 Visualizza Documento PDF">📄 View PDF Document</a>
+                            <a href="./documentos/oatly-argentina.pdf" target="_blank" data-en="📄 View Strategy PDF" data-it="📄 Visualizza PDF Strategico">📄 View Strategy PDF</a>
                         </div>
                     </article>
 
-                    <!-- Proyecto 2 -->
+                    <!-- Proyecto 2 (Ejemplo adicional de Supply Chain) -->
                     <article class="project-card">
-                        <h3 data-en="Supply Chain Optimization & Logistics Cost Reduction" data-it="Ottimizzazione della Supply Chain e Riduzione dei Costi Logistici">Supply Chain Optimization & Logistics Cost Reduction</h3>
-                        <p data-en="Simulation of multimodal transport routes and optimal Incoterms 2020 selection to minimize inventory costs and transit lead times between Europe and Asia." data-it="Simulazione di rotte di trasporto multimodale e selezione ottimale degli Incoterms 2020 per ridurre i costi di inventario e i tempi di transito tra Europa e Asia.">Simulation of multimodal transport routes and optimal Incoterms 2020 selection to minimize inventory costs and transit lead times between Europe and Asia.</p>
+                        <h3 data-en="Global Supply Chain & Operational Scale-Up" data-it="Supply Chain Globale e Scalabilità Operativa">Global Supply Chain & Operational Scale-Up</h3>
+                        <p data-en="Strategic optimization of international procurement routes, multi-modal transport frameworks, and Incoterms selection to protect operating margins and drive supply chain resilience." data-it="Ottimizzazione strategica delle rotte di approvvigionamento internazionale, quadri di trasporto multimodale e selezione degli Incoterms per proteggere i margini operativi e guidare la resilienza della supply chain.">Strategic optimization of international procurement routes, multi-modal transport frameworks, and Incoterms selection to protect operating margins and drive supply chain resilience.</p>
                         <div class="tags" style="margin-bottom: 1.2rem;">
-                            <span class="tag">Supply Chain</span>
-                            <span class="tag">Incoterms</span>
+                            <span class="tag" data-en="Operations" data-it="Operazioni">Operations</span>
+                            <span class="tag" data-en="Cost Optimization" data-it="Ottimizzazione dei Costi">Cost Optimization</span>
                         </div>
                         <div class="project-links">
-                            <a href="./documentos/reporte-logistica.pdf" target="_blank" data-en="📄 View PDF Document" data-it="📄 Visualizza Documento PDF">📄 View PDF Document</a>
+                            <a href="./documentos/reporte-logistica.pdf" target="_blank" data-en="📄 View Operational PDF" data-it="📄 Visualizza PDF Operativo">📄 View Operational PDF</a>
                         </div>
                     </article>
 
                 </div>
             </section>
+
+            <!-- Sección de Resume / Profile Highlights -->
+            <section id="resume" class="highlights-card">
+                <h2 class="section-title" data-en="💡 Profile Highlights" data-en-it="💡 Punti di Forza del Profilo" data-it="💡 Punti di Forza del Profilo">💡 Profile Highlights</h2>
+                <ul data-en="
+                    <li><b>3+ years</b> in international trade operations and supply chain management.</li>
+                    <li>Master in International Management at LUISS Business School · Bachelor's in International Trade at Universidad Empresarial Siglo 21[cite: 1].</li>
+                    <li>Selected for the Dean's List & Student Excellence Program at LUISS[cite: 1].</li>
+                    <li>Global business development & cross-border market entry strategies.</li>
+                    <li>Data-driven supply chain cost optimization (achieving 20% freight cost reduction)[cite: 1].</li>
+                    <li>Multilingual stakeholder coordination across LATAM, Europe & Asia[cite: 1].</li>
+                " data-it="
+                    <li><b>3+ anni</b> in operazioni di commercio estero e gestione della supply chain.</li>
+                    <li>Master in International Management presso la LUISS Business School · Laurea in Commercio Estero presso l'Universidad Empresarial Siglo 21[cite: 1].</li>
+                    <li>Selezionata per la Dean's List e il Student Excellence Program alla LUISS[cite: 1].</li>
+                    <li>Business development globale e strategie di ingresso in nuovi mercati.</li>
+                    <li>Ottimizzazione dei costi di supply chain basata sui dati (riduzione del 20% dei costi di trasporto)[cite: 1].</li>
+                    <li>Coordinamento multilingue degli stakeholder tra LATAM, Europa e Asia[cite: 1].</li>
+                ">
+                    <li><b>3+ years</b> in international trade operations and supply chain management.</li>
+                    <li>Master in International Management at LUISS Business School · Bachelor's in International Trade at Universidad Empresarial Siglo 21[cite: 1].</li>
+                    <li>Selected for the Dean's List & Student Excellence Program at LUISS[cite: 1].</li>
+                    <li>Global business development & cross-border market entry strategies.</li>
+                    <li>Data-driven supply chain cost optimization (achieving 20% freight cost reduction)[cite: 1].</li>
+                    <li>Multilingual stakeholder coordination across LATAM, Europe & Asia[cite: 1].</li>
+                </ul>
+            </section>
         </main>
     </div>
 
-    <!-- Script sencillo para cambiar el idioma al hacer clic -->
+    <!-- Script para cambiar el idioma -->
     <script>
         function setLanguage(lang) {
-            // Cambiar botones activos
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
 
-            // Traducir todos los elementos con atributos data-en y data-it
             document.querySelectorAll('[data-en]').forEach(el => {
                 if (lang === 'it' && el.getAttribute('data-it')) {
                     el.innerHTML = el.getAttribute('data-it');
