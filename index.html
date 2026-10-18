@@ -865,13 +865,13 @@
                 hon_t: "Méritos y Honores",
                 hon_d: "Seleccionada para la Dean's List y el Programa de Excelencia Estudiantil en LUISS",
                 str_t: "Fortalezas Clave",
-                st1: "Global business development & cross-border market entry strategies",
-                st2: "Data-driven supply chain cost optimization",
-                st3: "End-to-end international logistics",
-                st4: "Supplier & freight forwarder management",
-                st5: "B2B lead generation & competitor analysis",
-                st6: "Cross-functional coordination of stakeholders in international expansion projects",
-                st7: "Multilingual stakeholder coordination across LATAM, Europe & Asia"
+                st1: "Desarrollo de negocios globales y estrategias de entrada a nuevos mercados transfronterizos",
+                st2: "Optimización de costos en la cadena de suministro basada en datos",
+                st3: "Logística internacional de punta a punta",
+                st4: "Gestión de proveedores y agentes de carga (freight forwarders)",
+                st5: "Generación de leads B2B y análisis de competidores",
+                st6: "Coordinación interfuncional de stakeholders en proyectos de expansión internacional",
+                st7: "Coordinación de stakeholders multilingües en LATAM, Europa y Asia"
             },
             it: {
                 role: "Commercio Estero & Business Development",
@@ -925,14 +925,14 @@
                 edu_d: "Master in International Management – LUISS Business School",
                 hon_t: "Riconoscimenti",
                 hon_d: "Selezionata per la Dean's List e il Student Excellence Program alla LUISS",
-                str_t: "Key Strengths",
-                st1: "Global business development & cross-border market entry strategies",
-                st2: "Data-driven supply chain cost optimization",
-                st3: "End-to-end international logistics",
-                st4: "Supplier & freight forwarder management",
-                st5: "B2B lead generation & competitor analysis",
-                st6: "Cross-functional coordination of stakeholders in international expansion projects",
-                st7: "Multilingual stakeholder coordination across LATAM, Europe & Asia"
+                str_t: "Punti di Forza",
+                st1: "Sviluppo di business globale e strategie di ingresso nei mercati transfrontalieri",
+                st2: "Ottimizzazione dei costi della supply chain basata sui dati",
+                st3: "Logistica internazionale end-to-end",
+                st4: "Gestione di fornitori e spedizionieri (freight forwarder)",
+                st5: "Lead generation B2B e analisi dei competitor",
+                st6: "Coordinamento interfunzionale degli stakeholder in progetti di espansione internazionale",
+                st7: "Coordinamento multilingue degli stakeholder in LATAM, Europa e Asia"
             }
         };
 
@@ -982,8 +982,6 @@
             try {
                 const saved = localStorage.getItem('portfolio-lang');
                 if (saved && i18n[saved]) {
-                    // Si el usuario ya tenía una preferencia guardada previa, la respetamos, 
-                    // de lo contrario se inicia por defecto en 'en' tal como pediste.
                     lang = saved;
                 }
             } catch (e) {}
