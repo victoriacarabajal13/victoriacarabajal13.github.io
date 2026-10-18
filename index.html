@@ -35,7 +35,6 @@
             overflow: hidden;
         }
 
-        /* Estructura exacta de 3 columnas con scroll independiente */
         .layout-container {
             display: grid;
             grid-template-columns: 360px 1fr 340px;
@@ -45,7 +44,7 @@
             overflow: hidden;
         }
 
-        /* Columna 1: Sidebar Izquierdo */
+        /* COLUMNA 1 */
         aside.left-sidebar {
             background-color: var(--card-bg);
             border-right: 1px solid var(--border);
@@ -140,13 +139,6 @@
             padding-top: 1rem;
         }
 
-        .sidebar-info-block header-with-icon {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.2rem;
-        }
-
         .sidebar-info-block strong {
             display: flex;
             align-items: center;
@@ -191,7 +183,7 @@
             flex-shrink: 0;
         }
 
-        /* Columna 2: Centro (Contenido Principal y Proyectos) */
+        /* COLUMNA 2 */
         main.center-content {
             padding: 2.5rem 3rem;
             overflow-y: auto;
@@ -265,7 +257,6 @@
             line-height: 1.7;
         }
 
-        /* Core Skills & Focus */
         .skills-grid-section {
             border-top: 1px solid var(--border);
             border-bottom: 1px solid var(--border);
@@ -276,9 +267,6 @@
             font-size: 1.2rem;
             color: var(--text-main);
             margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
         .skills-columns {
@@ -302,7 +290,6 @@
             line-height: 1.5;
         }
 
-        /* Proyectos */
         .section-heading {
             font-size: 1.25rem;
             color: var(--text-main);
@@ -396,7 +383,7 @@
             text-decoration: underline;
         }
 
-        /* Columna 3: Sidebar Derecho (Profile Highlights) */
+        /* COLUMNA 3 */
         aside.right-sidebar {
             background-color: var(--card-bg);
             border-left: 1px solid var(--border);
@@ -443,7 +430,6 @@
             gap: 0.4rem;
         }
 
-        /* Selector de idioma fijo abajo a la derecha */
         .fixed-lang-selector {
             position: fixed;
             bottom: 1.5rem;
@@ -475,7 +461,6 @@
             color: #ffffff;
         }
 
-        /* Responsivo */
         @media (max-width: 1024px) {
             .layout-container {
                 grid-template-columns: 1fr;
@@ -493,7 +478,7 @@
 </head>
 <body>
 
-    <!-- Selector de idioma fijo abajo a la derecha -->
+    <!-- Selector de idioma -->
     <div class="fixed-lang-selector">
         <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
         <button class="lang-btn" onclick="setLanguage('es')">ES</button>
@@ -525,23 +510,9 @@
                 </a>
             </div>
 
-            <!-- Botón de CV dinámico -->
             <a id="cv-download-btn" href="./documentos/cv-victoria.pdf.pdf" class="btn-cv" download data-en-href="./documentos/cv-victoria.pdf.pdf" data-es-href="./documentos/cv-victoria-es.pdf.pdf" data-it-href="./documentos/cv-victoria-it.pdf.pdf" data-en="Download CV" data-es="Descargar CV" data-it="Scarica CV">Download CV</a>
 
-            <!-- Bloque de Habilidades Técnicas y Cost Optimization en Sidebar Izquierdo -->
-            <div class="sidebar-info-block">
-                <strong>
-                    <svg class="icon-svg" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-                    <span data-en="Technical & Core Skills" data-es="Habilidades Técnicas" data-it="Competenze Tecniche">Technical & Core Skills</span>
-                </strong>
-                <ul>
-                    <li data-en="SAP ERP & Logistics Data Analytics" data-es="SAP ERP y Analítica Logística" data-it="SAP ERP e Analisi Logistica">SAP ERP & Logistics Data Analytics</li>
-                    <li data-en="Supply Chain Cost Optimization" data-es="Optimización de Costos en Cadena de Suministro" data-it="Ottimizzazione Costi Supply Chain">Supply Chain Cost Optimization</li>
-                    <li data-en="Incoterms 2020 & Customs Compliance" data-es="Incoterms 2020 y Cumplimiento Aduanero" data-it="Incoterms 2020 e Conformità Doganale">Incoterms 2020 & Customs Compliance</li>
-                    <li data-en="Cross-Border Market Entry Modeling" data-es="Modelado de Entrada a Mercados" data-it="Modellazione Ingresso Mercati">Cross-Border Market Entry Modeling</li>
-                </ul>
-            </div>
-
+            <!-- ORDEN CORRECTO: 1. Based in -->
             <div class="sidebar-info-block">
                 <strong>
                     <svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
@@ -550,6 +521,7 @@
                 <span data-en="Rome, Italy · Open to global opportunities" data-es="Roma, Italia · Abierta a oportunidades globales" data-it="Roma, Italia · Aperta a opportunità globali">Rome, Italy · Open to global opportunities</span>
             </div>
 
+            <!-- ORDEN CORRECTO: 2. Languages -->
             <div class="sidebar-info-block">
                 <strong>
                     <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
@@ -557,11 +529,23 @@
                 </strong>
                 <span data-en="Spanish (Native) · English (C1) · Italian (B2)" data-es="Español (Nativo) · Inglés (C1) · Italiano (B2)" data-it="Spagnolo (Madrelingua) · Inglese (C1) · Italiano (B2)">Spanish (Native) · English (C1) · Italian (B2)</span>
             </div>
+
+            <!-- ORDEN CORRECTO: 3. Technical & Core Skills -->
+            <div class="sidebar-info-block">
+                <strong>
+                    <svg class="icon-svg" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                    <span data-en="Technical & Core Skills" data-es="Habilidades Técnicas" data-it="Competenze Tecniche">Technical & Core Skills</span>
+                </strong>
+                <ul>
+                    <li data-en="Incoterms 2020 & Customs Compliance" data-es="Incoterms 2020 y Cumplimiento Aduanero" data-it="Incoterms 2020 e Conformità Doganale">Incoterms 2020 & Customs Compliance[cite: 3]</li>
+                    <li data-en="SAP ERP & Logistics Data Analytics" data-es="SAP ERP y Analítica Logística" data-it="SAP ERP e Analisi Logistica">SAP ERP & Logistics Data Analytics[cite: 3]</li>
+                    <li data-en="Cross-Border Market Entry Modeling" data-es="Modelado de Entrada a Mercados" data-it="Modellazione Ingresso Mercati">Cross-Border Market Entry Modeling[cite: 3]</li>
+                </ul>
+            </div>
         </aside>
 
         <!-- COLUMNA 2: CONTENIDO PRINCIPAL Y PROYECTOS -->
         <main class="center-content">
-            <!-- Navegación superior -->
             <nav class="top-nav">
                 <div class="nav-tabs">
                     <a href="#overview" data-en="Overview" data-es="Resumen" data-it="Panoramica">Overview</a>
@@ -573,18 +557,15 @@
                 </div>
             </nav>
 
-            <!-- Overview Section -->
             <section id="overview" class="hero-section">
                 <h2 data-en="Driving international trade and global expansion through <span>strategy, market analysis, and execution.</span>" data-es="Impulsando el comercio internacional y la expansión global a través de <span>estrategia, análisis de mercado y ejecución.</span>" data-it="Guidare il commercio estero e l'espansione globale attraverso <span>strategia, analisi di mercato ed esecuzione.</span>">Driving international trade and global expansion through <span>strategy, market analysis, and execution.</span></h2>
                 <p data-en="From navigating international trade regulations and supply chains to designing scalable business development models. Explore my portfolio of master's projects where global commerce meets commercial reality." data-es="Desde la gestión de normativas de comercio internacional y cadenas de suministro hasta el diseño de modelos escalables de desarrollo de negocios. Explora mi portfolio de proyectos académicos donde el comercio global se encuentra con la realidad comercial." data-it="Dalla gestione delle normative del commercio internazionale e delle supply chain alla progettazione di modelli di business development scalabili. Esplora il mio portfolio di progetti magistrali in cui il commercio globale incontra la realtà commerciale.">From navigating international trade regulations and supply chains to designing scalable business development models. Explore my portfolio of master's projects where global commerce meets commercial reality.</p>
             </section>
 
-            <!-- Core Skills & Focus -->
+            <!-- TITULO PRINCIPAL LIMPIO (SIN ÍCONO) Y 3 MÓDULOS DE ABAJO (CON ÍCONO) -->
             <section class="skills-grid-section">
-                <h3 class="skills-title">
-                    <svg class="icon-svg" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                    <span data-en="Core Focus Areas" data-es="Áreas de Enfoque" data-it="Aree di Focus">Core Focus Areas</span>
-                </h3>
+                <h3 class="skills-title" data-en="Core Focus Areas" data-es="Áreas de Enfoque" data-it="Aree di Focus">Core Focus Areas</h3>
+                
                 <div class="skills-columns">
                     <div class="skill-column">
                         <h4>
@@ -610,12 +591,10 @@
                 </div>
             </section>
 
-            <!-- Selected Work -->
             <section id="work">
                 <h3 class="section-heading" data-en="Selected Work" data-es="Proyectos Seleccionados" data-it="Progetti Selezionati">Selected Work</h3>
                 <div class="projects-list">
-                    
-                    <!-- 1. AMAZON LEO -->
+                    <!-- AMAZON LEO -->
                     <article class="project-card featured">
                         <div class="project-image-container">
                             <img src="./assets/amazon-cover.jpg" alt="Amazon LEO Project Preview" class="project-image">
@@ -632,7 +611,7 @@
                         </div>
                     </article>
 
-                    <!-- 2. ENEL -->
+                    <!-- ENEL -->
                     <article class="project-card">
                         <div class="project-image-container">
                             <img src="./assets/enel-cover.jpg" alt="Enel Strategy Project Preview" class="project-image">
@@ -648,7 +627,7 @@
                         </div>
                     </article>
 
-                    <!-- 3. SOGRAPE -->
+                    <!-- SOGRAPE -->
                     <article class="project-card">
                         <div class="project-image-container">
                             <img src="./assets/sogrape-cover.jpg" alt="Sogrape Project Preview" class="project-image">
@@ -664,7 +643,7 @@
                         </div>
                     </article>
 
-                    <!-- 4. OATLY -->
+                    <!-- OATLY -->
                     <article class="project-card">
                         <div class="project-image-container">
                             <img src="./assets/oatly-cover.jpg" alt="Oatly Argentina Project Preview" class="project-image">
@@ -680,64 +659,63 @@
                             <a href="./documentos/oatly-argentina.pdf.pdf" target="_blank" class="project-action-link" data-en="View Strategy PDF &rarr;" data-es="Ver PDF Estratégico &rarr;" data-it="Visualizza PDF Strategico &rarr;">View Strategy PDF &rarr;</a>
                         </div>
                     </article>
-
                 </div>
             </section>
         </main>
 
-        <!-- COLUMNA 3: SIDEBAR DERECHO (PROFILE HIGHLIGHTS) -->
+        <!-- COLUMNA 3: SIDEBAR DERECHO (PROFILE HIGHLIGHTS CON LOS ITEMS COMPLETOS DE TU CV) -->
         <aside id="resume" class="right-sidebar">
-            <h3 data-en="Profile Highlights" data-es="Puntos Destacados" data-it="Punti di Forza del Profilo">
+            <h3>
                 <svg class="icon-svg" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                Profile Highlights
+                <span data-en="Profile Highlights" data-es="Puntos Destacados" data-it="Punti di Forza del Profilo">Profile Highlights</span>
             </h3>
             
             <div class="highlight-item">
-                <strong data-en="Experience" data-es="Experiencia" data-it="Esperienza">
+                <strong>
                     <svg class="icon-svg" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-                    Experience
+                    <span data-en="Experience" data-es="Experiencia" data-it="Esperienza">Experience</span>
                 </strong>
-                <p data-en="3+ years in international trade operations and supply chain management." data-es="Más de 3 años en operaciones de comercio internacional y gestión de cadena de suministro." data-it="3+ anni in operazioni di commercio estero e gestione della supply chain.">3+ years in international trade operations and supply chain management.</p>
+                <p data-en="3+ years in international trade operations and supply chain management." data-es="Más de 3 años en operaciones de comercio internacional y gestión de cadena de suministro." data-it="3+ anni in operazioni di commercio estero e gestione della supply chain.">3+ years in international trade operations and supply chain management[cite: 3].</p>
             </div>
 
             <div class="highlight-item">
-                <strong data-en="Education" data-es="Educación" data-it="Formazione">
+                <strong>
                     <svg class="icon-svg" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
-                    Education
+                    <span data-en="Education" data-es="Educación" data-it="Formazione">Education</span>
                 </strong>
-                <p data-en="Master in International Management – LUISS Business School (Dean's List)" data-es="Máster en International Management – LUISS Business School (Dean's List)" data-it="Master in International Management – LUISS Business School (Dean's List)">Master in International Management – LUISS Business School (Dean's List)</p>
+                <p data-en="Master in International Management – LUISS Business School (Dean's List)" data-es="Máster en International Management – LUISS Business School (Dean's List)" data-it="Master in International Management – LUISS Business School (Dean's List)">Master in International Management – LUISS Business School (Dean's List)[cite: 3]</p>
             </div>
 
             <div class="highlight-item">
-                <strong data-en="Honors" data-es="Méritos y Honores" data-it="Riconoscimenti">
+                <strong>
                     <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>
-                    Honors
+                    <span data-en="Honors" data-es="Méritos y Honores" data-it="Riconoscimenti">Honors</span>
                 </strong>
-                <p data-en="Selected for the Dean's List & Student Excellence Program at LUISS" data-es="Seleccionada para la Dean's List y el Programa de Excelencia Estudiantil en LUISS" data-it="Selezionata per la Dean's List e il Student Excellence Program alla LUISS">Selected for the Dean's List & Student Excellence Program at LUISS</p>
+                <p data-en="Selected for the Dean's List & Student Excellence Program at LUISS" data-es="Seleccionada para la Dean's List y el Programa de Excelencia Estudiantil en LUISS" data-it="Selezionata per la Dean's List e il Student Excellence Program alla LUISS">Selected for the Dean's List & Student Excellence Program at LUISS[cite: 3]</p>
             </div>
 
+            <!-- KEY STRENGTHS RESTAURADOS COMPLETOS DE TU CV -->
             <div class="highlight-item">
-                <strong data-en="Key Strengths" data-es="Fortalezas Clave" data-it="Punti di Forza">
+                <strong>
                     <svg class="icon-svg" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                    Key Strengths
+                    <span data-en="Key Strengths" data-es="Fortalezas Clave" data-it="Punti di Forza">Key Strengths</span>
                 </strong>
                 <ul>
-                    <li data-en="Global business development & cross-border market entry strategies" data-es="Desarrollo de negocios globales y estrategias de entrada a nuevos mercados" data-it="Business development globale e strategie di ingresso in nuovi mercati">Global business development & cross-border market entry strategies</li>
-                    <li data-en="Data-driven supply chain cost optimization (achieving 20% freight cost reduction)" data-es="Optimización de costos logísticos basada en datos (logrando una reducción del 20% en fletes)" data-it="Ottimizzazione dei costi di supply chain basata sui dati">Data-driven supply chain cost optimization (achieving 20% freight cost reduction)</li>
-                    <li data-en="Multilingual stakeholder coordination across LATAM, Europe & Asia" data-es="Coordinación de stakeholders multilingües en LATAM, Europa y Asia" data-it="Coordinamento multilingue degli stakeholder tra LATAM, Europa e Asia">Multilingual stakeholder coordination across LATAM, Europe & Asia</li>
+                    <li data-en="Global business development & cross-border market entry strategies" data-es="Desarrollo de negocios globales y estrategias de entrada a nuevos mercados" data-it="Business development globale e strategie di ingresso in nuovi mercati">Global business development & cross-border market entry strategies[cite: 3]</li>
+                    <li data-en="Data-driven supply chain cost optimization (achieving 20% freight cost reduction)" data-es="Optimización de costos logísticos basada en datos (logrando una reducción del 20% en fletes)" data-it="Ottimizzazione dei costi di supply chain basata sui dati (riduzione del 20% dei costi di trasporto)">Data-driven supply chain cost optimization (achieving 20% freight cost reduction)[cite: 3]</li>
+                    <li data-en="Multilingual stakeholder coordination across LATAM, Europe & Asia" data-es="Coordinación de stakeholders multilingües en LATAM, Europa y Asia" data-it="Coordinamento multilingue degli stakeholder tra LATAM, Europa e Asia">Multilingual stakeholder coordination across LATAM, Europe & Asia[cite: 3]</li>
                 </ul>
             </div>
         </aside>
 
     </div>
 
-    <!-- Script de traducción robusto y dinámico -->
+    <!-- Script de traducción corregido -->
     <script>
         function setLanguage(lang) {
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
 
-            // Traducir todos los elementos marcados con atributos data-en
             document.querySelectorAll('[data-en]').forEach(el => {
                 if (lang === 'es' && el.getAttribute('data-es')) {
                     el.innerHTML = el.getAttribute('data-es');
@@ -748,7 +726,6 @@
                 }
             });
 
-            // Actualizar el enlace de descarga del CV según el idioma
             const cvBtn = document.getElementById('cv-download-btn');
             if (cvBtn) {
                 if (lang === 'es' && cvBtn.getAttribute('data-es-href')) {
