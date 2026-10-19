@@ -976,16 +976,9 @@
             }
         }
 
-        /* ---------- Idioma inicial forzado a inglés ---------- */
+        /* ---------- Idioma inicial fijo en inglés (ignora guardados anteriores) ---------- */
         (function initLanguage() {
-            let lang = 'en';
-            try {
-                const saved = localStorage.getItem('portfolio-lang');
-                if (saved && i18n[saved]) {
-                    lang = saved;
-                }
-            } catch (e) {}
-            setLanguage(lang);
+            setLanguage('en');
         })();
     </script>
 </body>
